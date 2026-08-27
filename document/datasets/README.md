@@ -7,7 +7,7 @@ preenchida.
 
 | Base | Tipo | Fonte | URL | DOI | Licença | Data de acesso | Nº de registros | Citação formal |
 |---|---|---|---|---|---|---|---|---|
-| | | | | | | | | |
+| UCI Heart Disease (base Cleveland) | numérico | UCI Machine Learning Repository | https://archive.ics.uci.edu/dataset/45/heart+disease | 10.24432/C52P4X | CC BY 4.0 | 2026-08-27 | 303 | Janosi, A., Steinbrunn, W., Pfisterer, M., & Detrano, R. (1989). *Heart Disease* [Dataset]. UCI Machine Learning Repository. |
 | | | | | | | | | |
 | | | | | | | | | |
 
