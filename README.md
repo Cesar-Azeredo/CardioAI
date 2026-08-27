@@ -34,6 +34,8 @@ Esta primeira etapa corresponde a Fase 1 - Batimentos de Dados: Mapeando o Corac
 
 O foco da entrega e montar uma base inicial robusta com pensamento critico, considerando desde ja principios de Governanca de Dados, qualidade dos dados, vies e privacidade. A dificuldade em encontrar dados publicos, especialmente em saude, faz parte do processo real de projetos de IA. Por isso, persistencia, criatividade e combinacao de fontes (incluindo dados simulados quando necessario) sao elementos esperados nesta fase.
 
+> Governanca de dados e vies desta entrega, com numeros medidos (nao estimados) para cada uma das quatro bases: [`document/fase-01/governanca-e-vies.md`](document/fase-01/governanca-e-vies.md).
+
 ### Objetivo geral da Entrega 1
 
 Buscar e preparar tres tipos de dados fundamentais para uso futuro no projeto:
@@ -58,6 +60,8 @@ Referencia apresentada no enunciado:
 - Explicar no README a origem dos dados (reais ou simulados).
 - Justificar as variaveis clinicamente mais relevantes para IA em saude.
 
+**Entregue**: UCI Heart Disease, base Cleveland — dado real (nao simulado), 303 pacientes, licenca CC BY 4.0. Variaveis mais relevantes clinicamente: tipo de dor toracica, frequencia cardiaca maxima, depressao do segmento ST, numero de vasos por fluoroscopia (maior poder discriminativo nesta base), alem dos fatores de risco classicos (idade, sexo, colesterol, pressao em repouso). Justificativa individual de cada variavel e as decisoes de tratamento (auséncias preservadas, alvo em duas formas) em [`document/fase-01/dados-numericos.md`](document/fase-01/dados-numericos.md).
+
 ### Parte 2 - Dados Textuais (NLP)
 
 - Baixar no minimo 2 textos em formato .txt sobre doencas cardiacas, saude publica, sintomas ou tratamentos.
@@ -69,6 +73,8 @@ Referencia apresentada no enunciado:
     - classificacao de topicos
 - Justificar relevancia dessas analises no contexto de IA aplicada a saude.
 
+**Entregue**: 2 textos em `assets/textos/` — um tecnico-cientifico (SciELO, Arquivos Brasileiros de Cardiologia, 1.608 palavras, CC BY-NC 3.0) e um de comunicacao em saude publica (Ministerio da Saude, 858 palavras, CC BY-ND 3.0). O contraste de registro entre os dois e o proprio exemplo do problema que a Fase 5 (chatbot) precisa resolver: traduzir termo clinico para linguagem de paciente. Analise de sentimento nao se aplica a nenhum dos dois (nenhum e relato de paciente) — o corpus serve de baseline de vocabulario. Detalhe das 3 tecnicas de NLP com exemplo real de cada texto em [`document/fase-01/dados-textuais.md`](document/fase-01/dados-textuais.md).
+
 ### Parte 3 - Dados Visuais (Visao Computacional)
 
 - Reunir no minimo 100 imagens (.jpg ou .png) de exames cardiologicos (ECG, angiograma, raio-X toracico etc.).
@@ -79,6 +85,8 @@ Referencia apresentada no enunciado:
     - reconhecimento de anomalias
 - Destacar importancia dessas analises para solucoes de IA em saude.
 
+**Entregue**: ECG Images dataset of Cardiac Patients v2 (Mendeley Data, CC BY 4.0). Do dataset completo (928 arquivos), apenas 491 sao imagens de conteudo unico por hash MD5 (47% de redundancia, medida nao estimada) — deduplicado antes de qualquer amostragem. Selecao final: 120 imagens, balanceadas 30/30/30/30 por categoria, semente fixa, sem recompressao. Justificativa de deteccao de bordas/padroes/anomalias e o achado de *shortcut learning* (hash raso confundiu template do aparelho com conteudo clinico) em [`document/fase-01/dados-visuais.md`](document/fase-01/dados-visuais.md).
+
 ## 📦 Entregaveis obrigatorios
 
 O repositorio deve conter:
@@ -86,6 +94,8 @@ O repositorio deve conter:
 1. README.md detalhado com descricao da fase, objetivos, fontes e justificativas das tres partes.
 2. Subpasta com conteudos textuais (assets e/ou document).
 3. Links publicos acessiveis com os conjuntos completos de dados numericos e visuais.
+
+Status: itens 1 e 2 entregues (documentacao completa em `document/fase-01/`; textos em `assets/textos/`). Item 3 pendente — ver TODOs na secao "Links publicos da Entrega 1" acima.
 
 ## ⚠️ Orientacoes importantes da atividade
 
@@ -124,11 +134,19 @@ Organizacao adotada (dentro do padrao atual do template, sem pastas novas na rai
 
 ## 🔗 Links publicos da Entrega 1
 
-Preencher quando os dados estiverem prontos:
+Os arquivos ja estao prontos (ver `document/datasets/processed/` e a pasta
+externa gerada por `scripts/fase-01/05_organiza_imagens.py`); falta apenas
+publicar e colar os links abaixo. Testar cada um em janela anonima antes de
+considerar a fase pronta.
 
-- Dataset numerico (CSV/XLSX):
-- Imagens (JPG/PNG):
-- Fontes textuais (.txt):
+- **Dataset numerico — CSV** (303 linhas):
+  > ⚠️ TODO(humano): colar aqui o link publico (Drive/OneDrive) do `.csv`
+- **Dataset numerico — XLSX** (mesmo conteudo, outro formato — pode ser o mesmo link acima se hospedados juntos):
+  > ⚠️ TODO(humano): colar aqui o link publico do `.xlsx`, ou apagar esta linha se o link do CSV ja cobre os dois arquivos
+- **Imagens** (120 selecionadas, ~76 MB):
+  > ⚠️ TODO(humano): colar aqui o link publico (Drive/OneDrive) do conjunto de imagens de ECG
+- **Fontes textuais (.txt)**: ja versionadas em `assets/textos/` neste repositorio (nao depende de link externo para atender o enunciado); hospedar externamente e opcional:
+  > ⚠️ TODO(humano): colar aqui um link publico adicional, se o grupo decidir hospedar tambem fora do repositorio
 
 
 ## 📁 Estrutura de pastas
@@ -138,12 +156,20 @@ Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
 - <b>.github</b>: Nesta pasta ficarão os arquivos de configuração específicos do GitHub que ajudam a gerenciar e automatizar processos no repositório.
 
 - <b>assets</b>: aqui estão os arquivos relacionados a elementos não-estruturados deste repositório, como imagens.
+  - <b>assets/textos/</b>: os 2 arquivos `.txt` da Parte 2 (NLP).
+  - <b>assets/imagens/amostras/</b>: ~12 imagens de amostra da Parte 3 (o conjunto completo de 120 fica hospedado externamente — ver `assets/imagens/LEIA-ME.md`).
+  - <b>assets/mapa-mental/</b>: SVG/PNG do mapa mental da jornada de 7 fases.
 
-- <b>config</b>: Posicione aqui arquivos de configuração que são usados para definir parâmetros e ajustes do projeto.
+- <b>config</b>: Posicione aqui arquivos de configuração que são usados para definir parâmetros e ajustes do projeto. Não usado na Fase 1; reservado para parâmetros de sensores simulados (Fase 3) e de modelos preditivos (Fase 6).
 
 - <b>document</b>: aqui estão todos os documentos do projeto que as atividades poderão pedir. Na subpasta "other", adicione documentos complementares e menos importantes.
+  - <b>document/datasets/</b>: dataset numérico bruto e tratado (`raw/`, `processed/`), dicionário de dados e tabela de proveniência das quatro bases.
+  - <b>document/fase-01/</b>: documentação técnica da Fase 1 — dados numéricos, textuais, visuais, governança e viés, e autoavaliação contra a rubrica.
+
+- <b>notebooks</b>: notebooks de EDA/exploração, organizados por fase (`notebooks/fase-01/` reservado para a Fase 1).
 
 - <b>scripts</b>: Posicione aqui scripts auxiliares para tarefas específicas do seu projeto. Exemplo: deploy, migrações de banco de dados, backups.
+  - <b>scripts/fase-01/</b>: os 5 scripts reprodutíveis desta entrega (coleta, perfilamento e tratamento do dataset numérico, preparação dos textos, organização das imagens) — ver "Como executar o código" abaixo.
 
 - <b>src</b>: Todo o código fonte criado para o desenvolvimento do projeto ao longo das 7 fases.
 
@@ -151,7 +177,37 @@ Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
 
 ## 🔧 Como executar o código
 
-*Acrescentar as informações necessárias sobre pré-requisitos (IDEs, serviços, bibliotecas etc.) e instalação básica do projeto, descrevendo eventuais versões utilizadas. Colocar um passo a passo de como o leitor pode baixar o seu código e executá-lo a partir de sua máquina ou seu repositório. Considere a explicação organizada em fase.*
+**Pré-requisitos**: Python 3.12 (versão travada para paridade com o runtime do Google Colab — ver seção 7 do `CLAUDE.md`/`AGENTS.md`).
+
+```bash
+# 1. Criar e ativar um ambiente virtual
+python3.12 -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+
+# 2. Instalar as dependências travadas
+pip install -r requirements.txt
+```
+
+**Fase 1 — Batimentos de Dados**, nesta ordem:
+
+```bash
+# Parte 1 — dataset numérico (UCI Heart Disease)
+python scripts/fase-01/01_coleta_dataset_numerico.py
+python scripts/fase-01/02_perfila_dataset_numerico.py
+python scripts/fase-01/03_trata_dataset_numerico.py
+
+# Parte 2 — textos (SciELO + Ministério da Saúde)
+python scripts/fase-01/04_prepara_textos.py
+
+# Parte 3 — imagens de ECG (Mendeley Data)
+# pré-requisito: dataset já baixado e descompactado fora do repositório
+# (ver cabeçalho do script para o caminho esperado)
+python scripts/fase-01/05_organiza_imagens.py
+```
+
+Cada script imprime um relatório da execução (contagens, validações,
+decisões aplicadas) e é idempotente — pode ser rodado de novo sem
+efeito colateral. Detalhe de cada etapa em `document/fase-01/`.
 
 
 ## 🗃 Histórico de lançamentos
@@ -164,8 +220,8 @@ Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
     * 
 * 0.2.0 - XX/XX/2024
     * 
-* 0.1.0 - XX/XX/2024
-    *
+* 0.1.0 - 27/08/2026
+    * Fase 1 — Batimentos de Dados: dataset numérico (UCI Heart Disease, 303 pacientes), corpus textual (2 textos, técnico + leigo) e conjunto de imagens de ECG (120 selecionadas de 928, deduplicadas) coletados, tratados e documentados, com governança de dados e viés registrados.
 
 ## 📋 Licença
 
