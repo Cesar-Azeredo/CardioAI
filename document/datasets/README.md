@@ -1,0 +1,24 @@
+# Proveniência dos dados — Fase 1
+
+Registro de proveniência das bases usadas na Fase 1, exigido pela regra inviolável 5
+do `CLAUDE.md`/`AGENTS.md`. Preencher uma linha por base (numérica, textual, visual)
+antes de considerar a fase pronta — nenhum dado entra no repositório sem esta tabela
+preenchida.
+
+| Base | Tipo | Fonte | URL | DOI | Licença | Data de acesso | Nº de registros | Citação formal |
+|---|---|---|---|---|---|---|---|---|
+| | | | | | | | | |
+| | | | | | | | | |
+| | | | | | | | | |
+
+Campos:
+
+- **Base**: nome curto da base (ex.: "UCI Heart Disease").
+- **Tipo**: numérico / textual / visual.
+- **Fonte**: instituição ou repositório de origem.
+- **URL**: link público verificado — nunca inventado (regra inviolável 1).
+- **DOI**: quando existir.
+- **Licença**: licença de uso/redistribuição encontrada na página da base.
+- **Data de acesso**: data em que o dado foi baixado/verificado neste projeto.
+- **Nº de registros**: contagem real (linhas do CSV, imagens do conjunto, arquivos de texto).
+- **Citação formal**: referência no formato acadêmico padrão.

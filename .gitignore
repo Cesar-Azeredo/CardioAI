@@ -1,4 +1,48 @@
+# Convenção do template FIAP — não remover.
+# Planilhas ficam fora do Git por padrão: o enunciado pede os dados hospedados
+# em Drive/OneDrive, não versionados. Estas 4 linhas são as regras originais
+# do template; abaixo delas, negações estreitas liberam só o dataset processado
+# desta fase.
 *.csv
 *.tsv
 *.xls
 *.xlsx
+
+# Exceção deliberada: o dataset processado da Fase 1 é pequeno (~20 KB) e deve
+# ficar rastreado, para o corretor ver direto no GitHub sem precisar do link externo.
+!document/datasets/processed/*.csv
+!document/datasets/processed/*.xlsx
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Ambientes virtuais
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Dado volumoso — regra inviolável 2 do CLAUDE.md/AGENTS.md: nada acima de ~5 MB
+# e nenhum lote de imagens no Git. Dado bruto fica hospedado externamente
+# (Drive/OneDrive); o repositório guarda apenas o .gitkeep desta pasta.
+document/datasets/raw/*
+!document/datasets/raw/.gitkeep
+
+# Lote completo de imagens (100+) — hospedado externamente; só a amostra
+# leve em assets/imagens/amostras/ e o LEIA-ME ficam versionados.
+assets/imagens/*
+!assets/imagens/amostras/
+!assets/imagens/amostras/**
+!assets/imagens/LEIA-ME.md

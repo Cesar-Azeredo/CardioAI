@@ -109,12 +109,17 @@ O repositorio deve conter:
 4. Documento resumo com explicacoes claras, objetivas e bem estruturadas - 2 pontos.
 5. Cumprimento das orientacoes gerais e prazo de entrega - 1 ponto.
 
-## 🗂 Organização sugerida para os dados da Entrega 1
+## 🗂 Organização dos dados da Entrega 1
 
-Sugestao de organizacao (sem alterar o padrao atual do template):
+Organizacao adotada (dentro do padrao atual do template, sem pastas novas na raiz):
 
-- assets/textos/ -> arquivos .txt
-- document/datasets/ -> descricao dos datasets, dicionario de dados e referencias
+- assets/textos/ -> arquivos .txt da Parte 2 (NLP)
+- assets/imagens/amostras/ -> ~12 imagens de amostra da Parte 3; conjunto completo hospedado externamente (ver assets/imagens/LEIA-ME.md)
+- assets/mapa-mental/ -> SVG/PNG do mapa mental da jornada de 7 fases
+- document/datasets/raw/ e document/datasets/processed/ -> dataset numerico (Parte 1), bruto e tratado (.csv e .xlsx)
+- document/datasets/README.md -> proveniencia (fonte, URL, DOI, licenca, data de acesso) das tres bases
+- document/fase-01/ -> documentos tecnicos da fase (dados numericos, textuais, visuais, governanca e vies)
+- document/ai_project_document_fiap.md -> documento resumo avaliado pela rubrica
 - links publicos no README -> dados completos (numericos e visuais)
 
 ## 🔗 Links publicos da Entrega 1
