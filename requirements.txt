@@ -1,7 +1,15 @@
-pandas>=2.1,<3.0
-numpy>=1.26,<2.0
-matplotlib>=3.8,<4.0
-openpyxl>=3.1,<4.0
-ucimlrepo>=0.0.7,<0.1
-Pillow>=10.0,<11.0
-jupyter>=1.0,<2.0
+# Versoes travadas para Python 3.12 (ver secao 7 do CLAUDE.md/AGENTS.md).
+# numpy fixado exatamente na versao do runtime padrao do Google Colab (2.0.2)
+# em 2026-08-27. pandas travado abaixo de 3.0 deliberadamente: pandas 3.0 traz
+# breaking changes (copy-on-write por padrao, dtype de string) e este repo tem
+# mais 6 fases e varias pessoas mexendo — nao vale o risco so por estar mais
+# recente. As demais foram testadas e instaladas via wheel (sem compilar do
+# fonte) contra esse par numpy/pandas, no mesmo Python 3.12 — nao ha
+# confirmacao de que sejam identicas ao que o Colab tem hoje para elas.
+numpy==2.0.2
+pandas>=2.2,<3
+matplotlib==3.11.1
+openpyxl==3.1.5
+ucimlrepo==0.0.7
+Pillow==12.3.0
+jupyter==1.1.1

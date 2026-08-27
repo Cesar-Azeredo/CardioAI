@@ -252,7 +252,9 @@ Implicações para decisões tomadas agora:
 
 ## 7. Convenções técnicas
 
-**Stack:** Python 3.11+, `pandas`, `numpy`, `matplotlib`, `openpyxl`, `ucimlrepo`, `Pillow`. Notebooks compatíveis com **Jupyter e Google Colab**. Não adicionar dependência pesada sem necessidade.
+**Stack:** Python 3.12, `pandas`, `numpy`, `matplotlib`, `openpyxl`, `ucimlrepo`, `Pillow`. Notebooks compatíveis com **Jupyter e Google Colab**. Não adicionar dependência pesada sem necessidade.
+
+**Versão do Python travada em 3.12** — paridade com o runtime padrão do Google Colab (3.12.13 à data de escrita, com `numpy` 2.0.2, PyTorch 2.11, TensorFlow 2.20). Isso importa a partir da Fase 4 (Visão Computacional), quando o projeto passa a depender de TensorFlow/PyTorch e qualquer notebook rodado localmente precisa continuar compatível com o que roda no Colab.
 
 **Encoding:** UTF-8 em tudo. CSV com separador `,` e decimal `.`.
 
