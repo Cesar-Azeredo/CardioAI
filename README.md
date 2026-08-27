@@ -48,7 +48,7 @@ Buscar e preparar tres tipos de dados fundamentais para uso futuro no projeto:
 
 Referencia apresentada no enunciado:
 
-- mapaMental - CardioIA_ A Nova Era da Cardiologia Inteligente.svg
+- [Mapa mental — CardioIA: A Nova Era da Cardiologia Inteligente](assets/mapa-mental/imagem-mapa-mental.png)
 
 ## ✅ Escopo da Entrega 1 (Fase 1)
 
