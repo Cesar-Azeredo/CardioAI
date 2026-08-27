@@ -181,13 +181,15 @@ Leitura da rubrica: **4 dos 10 pontos são de escrita e organização** (o crit�
 - Citação: Janosi, A., Steinbrunn, W., Pfisterer, M., & Detrano, R. (1989). *Heart Disease* [Dataset]. UCI Machine Learning Repository.
 - Atende o mínimo de 100 linhas com folga (303).
 
-**Visual — ECG Images dataset of Cardiac and COVID-19 Patients (Mendeley Data)**
+**Visual — ECG Images dataset of Cardiac Patients, versão 2 (Mendeley Data)**
 - Página: `https://data.mendeley.com/datasets/gwbz3fsgp8/2` — DOI `10.17632/gwbz3fsgp8.2`
-- 1.937 registros distintos de pacientes, ECG de 12 derivações, capturados com equipamento EDAN SERIES-3 em unidades de cardiologia e isolamento no Paquistão (Ch. Pervaiz Elahi Institute of Cardiology, Multan).
-- Revisão manual por médicos em 5 categorias: COVID-19, batimento cardíaco anormal, infarto do miocárdio (IM), histórico prévio de IM e pessoa normal.
-- Artigo descritor: Khan, A. H., Hussain, M., & Malik, M. K. (2021). *ECG images dataset of Cardiac and COVID-19 patients*. Data in Brief, 34, 106762. DOI `10.1016/j.dib.2021.106762`.
-- ⚠️ **Confirmar a licença na página do dataset antes de redistribuir** e registrar a licença encontrada em `data/README.md`. O artigo descritor é CC BY-NC-ND, o que restringe obra derivada — para uso acadêmico com atribuição está adequado, mas a licença precisa estar documentada.
-- Atende o mínimo de 100 imagens com muita folga. **Selecionar um subconjunto de ~120 imagens** balanceado entre as categorias disponíveis, e documentar o critério da amostragem.
+- **Licença do dataset (confirmada na própria página, bloco JSON-LD e bloco de metadados): CC BY 4.0** — não confundir com a licença do artigo descritor abaixo, que é um documento diferente com licença diferente (CC BY-NC-ND).
+- **Contribuidores do dataset (conforme a página): Ali Haider Khan e Muzammil Hussain** (University of Management and Technology, Lahore). Malik, M. K. é coautor do artigo descritor na Data in Brief, não consta como contribuidor do dataset em si.
+- **A v2 NÃO tem categoria COVID-19** (isso era a v1). São 4 categorias: infarto do miocárdio (240 pacientes anunciados), histórico prévio de infarto (172), batimento cardíaco anormal (233), pessoa normal (284) — capturadas com equipamento EDAN SERIES-3 no Ch. Pervaiz Elahi Institute of Cardiology, Multan, Paquistão. Cada arquivo é o ECG completo de 12 derivações num único composite (não 1 arquivo por derivação).
+- **Tamanho real extraído: 589 MB** (194 MB é o `.zip` comprimido para download, não o conteúdo extraído).
+- **Volume real verificado: 928 arquivos** (929 esperados pelos nomes das pastas; falta `MI(215).jpg`) — dos quais **apenas 491 são imagens de conteúdo único por MD5** (47% de redundância; por categoria: MI 239→30, PMI 172→86, Normal 284→142, HB 233→233 sem duplicata). Checagem de quase-duplicata por hash perceptual (dHash 256 bits) não encontrou nada abaixo do limiar de quase-certeza — os pares mais próximos, inspecionados visualmente, são pacientes genuinamente diferentes que só compartilham o template do aparelho.
+- Artigo descritor (documento e licença separados do dataset): Khan, A. H., Hussain, M., & Malik, M. K. (2021). *ECG images dataset of Cardiac and COVID-19 patients*. Data in Brief, 34, 106762. DOI `10.1016/j.dib.2021.106762`. **CC BY-NC-ND** — restringe obra derivada; adequado para uso acadêmico com atribuição, mas essa licença é do artigo, não do dataset.
+- Atende o mínimo de 100 imagens com muita folga. Amostra selecionada: **120 imagens, balanceadas 30/30/30/30 por categoria** (o teto de imagens únicas da categoria "infarto" — 30 — definiu a cota igual das demais), deduplicada por MD5, com seleção reprodutível por semente fixa. Registrar a licença e a proveniência em `document/datasets/README.md`.
 
 **Textual — escolher no mínimo 2**
 - SciELO Brasil (`https://www.scielo.br`) — buscar em *Arquivos Brasileiros de Cardiologia*; artigos em acesso aberto.
