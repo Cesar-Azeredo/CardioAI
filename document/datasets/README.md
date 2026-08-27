@@ -8,7 +8,8 @@ preenchida.
 | Base | Tipo | Fonte | URL | DOI | Licença | Data de acesso | Nº de registros | Citação formal |
 |---|---|---|---|---|---|---|---|---|
 | UCI Heart Disease (base Cleveland) | numérico | UCI Machine Learning Repository | https://archive.ics.uci.edu/dataset/45/heart+disease | 10.24432/C52P4X | CC BY 4.0 | 2026-08-27 | 303 | Janosi, A., Steinbrunn, W., Pfisterer, M., & Detrano, R. (1989). *Heart Disease* [Dataset]. UCI Machine Learning Repository. |
-| | | | | | | | | |
+| Trajetórias da Saúde Cardiovascular... (texto 1) | textual | SciELO — Arquivos Brasileiros de Cardiologia | https://www.scielo.br/j/abc/a/ZQMYdZFc7nYvKzVC6mXFKMt/?lang=pt | 10.5935/abc.20140065 | CC BY-NC 3.0 | 2026-08-27 | 1 (1.608 palavras) | Pellanda, L. C. (2014). Trajetórias da Saúde Cardiovascular: Epidemiologia do Curso da Vida no Brasil [editorial]. Arquivos Brasileiros de Cardiologia, 102(5), 418–419. |
+| Hipertensão (pressão alta) (texto 2) | textual | Ministério da Saúde — Saúde de A a Z | https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/h/hipertensao | — | CC BY-ND 3.0 (SemDerivações) | 2026-08-27 | 1 (858 palavras) | Ministério da Saúde. *Hipertensão (pressão alta)*. Saúde de A a Z. Data de publicação não localizada na página — TODO(humano) se necessário para a rubrica. |
 | | | | | | | | | |
 
 Campos:

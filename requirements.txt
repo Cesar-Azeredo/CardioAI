@@ -13,3 +13,9 @@ openpyxl==3.1.5
 ucimlrepo==0.0.7
 Pillow==12.3.0
 jupyter==1.1.1
+
+# Usados por scripts/fase-01/04_prepara_textos.py (coleta e extracao dos
+# textos da Parte 2). beautifulsoup4 ja vinha transitivo via jupyter/nbconvert;
+# fixado aqui como dependencia direta porque o script importa bs4 diretamente.
+requests==2.34.2
+beautifulsoup4==4.15.0
