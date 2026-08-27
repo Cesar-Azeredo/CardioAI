@@ -71,15 +71,17 @@ de escopo, não uma lacuna).
 
 **Entregue**: nenhum dado identificável de paciente, nenhum arquivo
 volumoso commitado, proveniência registrada para as 4 bases, `TODO(humano)`
-usado sempre que um dado não pôde ser verificado (nunca inventado).
+usado sempre que um dado não pôde ser verificado (nunca inventado). Dados do
+grupo preenchidos no `README.md` (nome do grupo, os 3 integrantes com RM,
+tutor e coordenadora). Os 4 links públicos testados pelo humano em janela
+anônima — confirmado que abrem sem login, incluindo abertura de imagem
+individual dentro da pasta de ECG.
 
-**O que ainda não pode ser autoavaliado por mim**: (a) "testar os links em
-janela anônima" — os 4 links já existem e foram publicados, mas confirmar
-que abrem sem login é uma verificação que só o humano pode fazer (o agente
-não tem como abrir navegador); (b) **prazo de entrega** — não tenho a
-data-limite da atividade em nenhum documento deste repositório, então não
-posso afirmar cumprimento de prazo; isso só o humano sabe. **Risco: baixo**,
-dependente apenas de confirmação humana, não de trabalho pendente.
+**O que ainda não pode ser autoavaliado por mim**: **prazo de entrega** —
+não tenho a data-limite da atividade em nenhum documento deste repositório,
+então não posso afirmar cumprimento de prazo; isso só o humano sabe.
+**Risco: baixo**, é a única verificação fora do meu alcance, e não afeta a
+qualidade do que foi entregue.
 
 ## Resumo do risco
 
@@ -89,8 +91,8 @@ dependente apenas de confirmação humana, não de trabalho pendente.
 | 2. Textos | 2 | Sim — data do Texto 2 registrada como nota de proveniência, não mais TODO |
 | 3. Imagens | 2 | Sim — link público publicado (era o maior risco da entrega) |
 | 4. Documento resumo | 2 | Sim, com ressalva sobre profundidade inline vs. linkada |
-| 5. Orientações e prazo | 1 | Regras de conduta cumpridas; falta só confirmação humana dos links em janela anônima e da data-limite |
+| 5. Orientações e prazo | 1 | Sim — dados do grupo preenchidos, links testados e confirmados pelo humano; só a data-limite não pode ser autoavaliada por mim |
 
-**Ação restante antes da entrega**: o humano confirmar, em janela anônima,
-que os 4 links do Google Drive abrem sem login — é a única verificação que
-o agente não pode fazer sozinho.
+**Ação restante**: nenhuma de conteúdo. Só o humano confirmar que a entrega
+está dentro do prazo da atividade — informação que não consta neste
+repositório.

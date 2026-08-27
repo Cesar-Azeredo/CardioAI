@@ -227,15 +227,13 @@ publicação dos 4 links no Google Drive:
 - [x] **≥ 2** arquivos `.txt` em `assets/textos/`, em UTF-8, com proveniência registrada (2 arquivos, `PROVENIENCIA.md`).
 - [x] **≥ 100** imagens organizadas (120) e hospedadas, com `manifest-imagens.csv` (nome do arquivo, categoria, dimensões, origem, hash e aliases) versionado no repositório. Hospedagem: [Google Drive](https://drive.google.com/drive/folders/12YhReksoB8K-aWQsubtUIaEx4zK9EuF3?usp=drive_link).
 - [x] ~12 imagens de amostra em `assets/imagens/amostras/`.
-- [ ] Links públicos testados **em janela anônima** e funcionando sem login — **os 4 links foram publicados; o teste em janela anônima em si só o humano pode confirmar** (o agente não tem como abrir navegador). Pendente de verificação humana.
+- [x] Links públicos testados **em janela anônima** e funcionando sem login — confirmado pelo humano: os 4 links do Drive abrem corretamente, incluindo abertura de imagem individual dentro da pasta de ECG.
 - [x] `README.md` da raiz cobrindo as três partes, com as justificativas clínicas e de IA exigidas, e integrado ao template FIAP sem quebrá-lo.
 - [x] `document/fase-01/governanca-e-vies.md` completo.
 - [x] Nenhum TODO de link pendente — os 4 links (dataset numérico, imagens, textos, pasta-mãe) foram publicados e substituídos no `README.md`, `assets/imagens/LEIA-ME.md` e `document/datasets/README.md`. A única observação restante (data de publicação do Texto 2) deixou de ser TODO — é nota de proveniência definitiva, porque a página-fonte não expõe esse campo.
 - [x] Autoavaliação escrita contra a rubrica da seção 5.2, critério por critério (`document/fase-01/autoavaliacao.md`).
 
-**10 de 11 itens verdadeiros.** O único item aberto (teste dos links em
-janela anônima) depende só de o humano confirmar — não é um problema de
-conteúdo, é uma verificação que o agente não pode executar sozinho.
+**11 de 11 itens verdadeiros. Fase 1 completa.**
 
 ---
 

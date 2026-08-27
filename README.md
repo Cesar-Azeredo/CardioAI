@@ -15,15 +15,15 @@ CardioIA: A Nova Era da Cardiologia Inteligente
 Grupo Zion
 
 ## 👨‍🎓 Integrantes: 
-- <a href="https://www.linkedin.com/in/carlos-costato/">Carlos Costato</a>
-- <a href="https://www.linkedin.com/in/phellype-massarente-13739810a/">Phellype Flaibam</a>
-- <a href="https://www.linkedin.com/in/cesar-azeredo">Cesar Azeredo</a>
+- <a href="https://www.linkedin.com/in/cesar-azeredo">Cesar Martinho de Azeredo — RM568140</a>
+- <a href="https://www.linkedin.com/in/carlos-costato/">Carlos Alberto Florindo Costato — RM567005</a>
+- <a href="https://www.linkedin.com/in/phellype-massarente-13739810a/">Phellype Matheus Giacoia Flaibam Massarente — RM566826</a>
 
 ## 👩‍🏫 Professores:
 ### Tutor(a) 
 - <a href="https://www.linkedin.com/company/inova-fusca">Andre Godoy</a>
 ### Coordenador(a)
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do Coordenador</a>
+- <a href="https://www.linkedin.com/company/inova-fusca">Ana Cristina dos Santos</a>
 
 
 ## 📜 Descrição
