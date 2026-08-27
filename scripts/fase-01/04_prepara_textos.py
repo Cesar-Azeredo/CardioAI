@@ -266,7 +266,7 @@ onde a fonte não expõe um campo, está marcado como `TODO(humano)`.
 - **Fonte**: Ministério da Saúde — Saúde de A a Z
 - **URL**: {URL_GOVBR}
 - **Licença**: {m2['licenca_texto_pagina']} ({m2['licenca_url']})
-- **Data de publicação/última atualização**: TODO(humano) — não encontramos campo de data associado a este conteúdo na página (sem `<time>`, sem meta `citation_*`, sem `dateModified`/`datePublished` em JSON-LD); se a rubrica exigir, confirmar via Wayback Machine ou contato direto com o Ministério da Saúde.
+- **Data de publicação/última atualização**: a página-fonte não expõe data de publicação nem de atualização (verificado: sem `<time>`, sem meta `citation_*`, sem `dateModified`/`datePublished` em JSON-LD) — a data de acesso abaixo é a referência temporal disponível.
 - **Data de acesso**: {DATA_DE_ACESSO}
 - **Nº de palavras (contado, `texto.split()`)**: {contagem_t2[0]}
 - **Nº de caracteres (contado, `len(texto)`)**: {contagem_t2[1]}

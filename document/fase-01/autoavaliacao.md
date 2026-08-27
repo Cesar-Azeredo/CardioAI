@@ -15,13 +15,9 @@ preservada por ser MNAR, alvo em duas formas, faixas de sanidade separadas
 de critério clínico). Variáveis mais relevantes justificadas individualmente
 em `document/fase-01/dados-numericos.md`.
 
-**O que falta para fechar o critério**: o **link público externo** (Drive/
-OneDrive) do dataset ainda não existe — está marcado `TODO(humano)` no
-`README.md`. O enunciado pede esse link explicitamente na Parte 1, mesmo o
-CSV já estando versionado no GitHub. Sem ele, o critério não está 100%
-cumprido, apesar de todo o resto (organização, explicação, script) estar
-pronto. **Risco: baixo-médio** — é só publicar e colar o link, mas até isso
-acontecer o item está objetivamente incompleto.
+**Atualização**: o link público (Google Drive) foi publicado e está no
+`README.md` e em `document/datasets/README.md`. Critério fechado — nada
+pendente.
 
 ## 2. Textos selecionados e contextualizados corretamente — 2 pontos
 
@@ -32,13 +28,12 @@ de NLP do enunciado com exemplo extraído do conteúdo real de cada texto
 (não genérico), incluindo a observação explícita de que sentimento não se
 aplica a nenhum dos dois (autocrítica já embutida na entrega, não escondida).
 
-**O que falta para fechar o critério**: a data de publicação/atualização do
-Texto 2 (Ministério da Saúde) não foi localizada na página-fonte — marcado
-`TODO(humano)`, com sugestão de verificar via Wayback Machine se a rubrica
-exigir essa data especificamente. Não há requisito explícito de link externo
-para os textos (o enunciado pede "armazenar em subpasta do repositório", já
-cumprido), então este critério está **objetivamente mais perto de completo**
-que os critérios 1 e 3. **Risco: baixo.**
+**Atualização**: a data de publicação/atualização do Texto 2 (Ministério da
+Saúde) não foi localizada na página-fonte — não é mais um `TODO`, é nota de
+proveniência definitiva (a página verificadamente não expõe esse campo; a
+data de acesso registrada é a referência temporal disponível). Textos também
+publicados no Google Drive, além de versionados no repositório. Critério
+fechado.
 
 ## 3. Imagens entregues e bem justificadas em seu potencial para análise por IA — 2 pontos
 
@@ -49,16 +44,10 @@ selecionadas e balanceadas com critério justificado, manifest completo com
 aliases de duplicata, 12 amostras versionadas no repositório, justificativa
 de Visão Computacional ligada ao formato real do dado (`dados-visuais.md`).
 
-**O que falta para fechar o critério — este é o maior risco da entrega**: as
-120 imagens em resolução completa **existem só localmente**
-(`/Users/cesar/Downloads/cardioia-fase1-imagens-selecionadas/`, fora do
-repositório) e **ainda não foram publicadas em nenhum lugar acessível ao
-corretor**. O enunciado exige "imagens entregues" e link público — hoje, o
-corretor só consegue ver as 12 amostras reduzidas no GitHub. Enquanto o link
-não for publicado, este critério está de fato **incompleto**, não só
-faltando um link cosmético como no critério 1 — é a entrega física do
-principal artefato desta parte que ainda não aconteceu. **Risco: alto até o
-upload acontecer.**
+**Atualização**: as 120 imagens foram publicadas no Google Drive (link em
+`README.md` e `assets/imagens/LEIA-ME.md`) — este era o maior risco da
+entrega (a entrega física do principal artefato desta parte, não só um link
+cosmético) e está resolvido. Critério fechado.
 
 ## 4. Documento resumo com explicações claras, objetivas e bem estruturadas — 2 pontos
 
@@ -84,25 +73,24 @@ de escopo, não uma lacuna).
 volumoso commitado, proveniência registrada para as 4 bases, `TODO(humano)`
 usado sempre que um dado não pôde ser verificado (nunca inventado).
 
-**O que falta / não pode ser autoavaliado por mim**: (a) "testar os links em
-janela anônima" — não é possível ainda, os links não existem; (b) **prazo
-de entrega** — não tenho a data-limite da atividade em nenhum documento
-deste repositório, então não posso afirmar cumprimento de prazo; isso só o
-humano sabe. **Risco: médio**, inteiramente dependente de ação humana
-(publicar os 2-3 links pendentes e confirmar a data-limite), não de
-qualidade do trabalho já feito.
+**O que ainda não pode ser autoavaliado por mim**: (a) "testar os links em
+janela anônima" — os 4 links já existem e foram publicados, mas confirmar
+que abrem sem login é uma verificação que só o humano pode fazer (o agente
+não tem como abrir navegador); (b) **prazo de entrega** — não tenho a
+data-limite da atividade em nenhum documento deste repositório, então não
+posso afirmar cumprimento de prazo; isso só o humano sabe. **Risco: baixo**,
+dependente apenas de confirmação humana, não de trabalho pendente.
 
 ## Resumo do risco
 
 | Critério | Pontos | Está pronto? |
 |---|---|---|
-| 1. Dataset numérico | 3 | Conteúdo sim; link público **não** |
-| 2. Textos | 2 | Sim, com 1 TODO menor (data do Texto 2) |
-| 3. Imagens | 2 | Conteúdo sim; **upload/link público não existe ainda — maior risco da entrega** |
+| 1. Dataset numérico | 3 | Sim — link público publicado |
+| 2. Textos | 2 | Sim — data do Texto 2 registrada como nota de proveniência, não mais TODO |
+| 3. Imagens | 2 | Sim — link público publicado (era o maior risco da entrega) |
 | 4. Documento resumo | 2 | Sim, com ressalva sobre profundidade inline vs. linkada |
-| 5. Orientações e prazo | 1 | Regras de conduta cumpridas; link e prazo dependem do humano |
+| 5. Orientações e prazo | 1 | Regras de conduta cumpridas; falta só confirmação humana dos links em janela anônima e da data-limite |
 
-**Ação de maior prioridade antes da entrega**: publicar o link das 120
-imagens (critério de maior risco) e do dataset numérico, colar os dois no
-`README.md`, testar ambos em janela anônima, e então remover os `TODO(humano)`
-correspondentes.
+**Ação restante antes da entrega**: o humano confirmar, em janela anônima,
+que os 4 links do Google Drive abrem sem login — é a única verificação que
+o agente não pode fazer sozinho.

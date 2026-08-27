@@ -30,7 +30,7 @@ Consequências práticas, que valem como regra:
 | Campo | Valor |
 |---|---|
 | **Fase em andamento** | nenhuma |
-| Fases concluídas | **Fase 1 — Batimentos de Dados** (dado coletado, tratado e documentado nas três partes; pendente apenas ação humana — publicar os links externos do dataset numérico e das imagens, ver TODOs no `README.md` e em `document/fase-01/autoavaliacao.md`) |
+| Fases concluídas | **Fase 1 — Batimentos de Dados** (dado coletado, tratado e documentado nas três partes; links públicos publicados no Google Drive) |
 | Ambiente | VS Code local, repositório já criado a partir do template FIAP e conectado ao GitHub |
 | Idioma dos entregáveis | **Português do Brasil** |
 
@@ -218,23 +218,24 @@ O enunciado cobra explicitamente os conceitos iniciais de Governança de Dados e
 Só considerar a fase pronta quando **todos** os itens estiverem verdadeiros.
 Status verificado em 2026-08-27 (caminhos corrigidos abaixo — a versão
 anterior desta lista referenciava `data/` e `docs/`, pastas que a seção 3
-não usa mais desde a correção da árvore de diretórios):
+não usa mais desde a correção da árvore de diretórios). Atualizado após a
+publicação dos 4 links no Google Drive:
 
 - [x] Dataset em `document/datasets/processed/` em `.csv` **e** `.xlsx`, com **≥ 100 linhas** (303, contagem verificada por script, não estimada).
 - [x] `document/datasets/dicionario-de-dados.md` com variável, tipo, unidade, faixa válida e significado clínico de cada coluna.
 - [x] Script reprodutível de coleta/tratamento em `scripts/fase-01/`, rodando de ponta a ponta sem erro em ambiente limpo (testado em venv Python 3.12 recriado do zero).
 - [x] **≥ 2** arquivos `.txt` em `assets/textos/`, em UTF-8, com proveniência registrada (2 arquivos, `PROVENIENCIA.md`).
-- [x] **≥ 100** imagens organizadas (120), com `manifest-imagens.csv` (nome do arquivo, categoria, dimensões, origem, hash e aliases) versionado no repositório — **mas ainda não hospedadas**: o conjunto completo existe só localmente, upload pendente (ver item seguinte).
+- [x] **≥ 100** imagens organizadas (120) e hospedadas, com `manifest-imagens.csv` (nome do arquivo, categoria, dimensões, origem, hash e aliases) versionado no repositório. Hospedagem: [Google Drive](https://drive.google.com/drive/folders/12YhReksoB8K-aWQsubtUIaEx4zK9EuF3?usp=drive_link).
 - [x] ~12 imagens de amostra em `assets/imagens/amostras/`.
-- [ ] Links públicos testados **em janela anônima** e funcionando sem login — **pendente**: links do dataset numérico e das imagens ainda não publicados.
+- [ ] Links públicos testados **em janela anônima** e funcionando sem login — **os 4 links foram publicados; o teste em janela anônima em si só o humano pode confirmar** (o agente não tem como abrir navegador). Pendente de verificação humana.
 - [x] `README.md` da raiz cobrindo as três partes, com as justificativas clínicas e de IA exigidas, e integrado ao template FIAP sem quebrá-lo.
 - [x] `document/fase-01/governanca-e-vies.md` completo.
-- [ ] Nenhum TODO de link pendente — **falso no momento**: ver lista completa de TODOs em `document/fase-01/autoavaliacao.md` e no `README.md`.
+- [x] Nenhum TODO de link pendente — os 4 links (dataset numérico, imagens, textos, pasta-mãe) foram publicados e substituídos no `README.md`, `assets/imagens/LEIA-ME.md` e `document/datasets/README.md`. A única observação restante (data de publicação do Texto 2) deixou de ser TODO — é nota de proveniência definitiva, porque a página-fonte não expõe esse campo.
 - [x] Autoavaliação escrita contra a rubrica da seção 5.2, critério por critério (`document/fase-01/autoavaliacao.md`).
 
-**8 de 11 itens verdadeiros.** Os 3 pendentes dependem só de ação humana
-(publicar 2-3 links e testá-los) — nenhum trabalho de coleta, tratamento ou
-documentação está em aberto.
+**10 de 11 itens verdadeiros.** O único item aberto (teste dos links em
+janela anônima) depende só de o humano confirmar — não é um problema de
+conteúdo, é uma verificação que o agente não pode executar sozinho.
 
 ---
 

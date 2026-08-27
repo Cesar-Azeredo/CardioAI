@@ -60,7 +60,7 @@ Referencia apresentada no enunciado:
 - Explicar no README a origem dos dados (reais ou simulados).
 - Justificar as variaveis clinicamente mais relevantes para IA em saude.
 
-**Entregue**: UCI Heart Disease, base Cleveland — dado real (nao simulado), 303 pacientes, licenca CC BY 4.0. Variaveis mais relevantes clinicamente: tipo de dor toracica, frequencia cardiaca maxima, depressao do segmento ST, numero de vasos por fluoroscopia (maior poder discriminativo nesta base), alem dos fatores de risco classicos (idade, sexo, colesterol, pressao em repouso). Justificativa individual de cada variavel e as decisoes de tratamento (auséncias preservadas, alvo em duas formas) em [`document/fase-01/dados-numericos.md`](document/fase-01/dados-numericos.md).
+**Entregue**: UCI Heart Disease, base Cleveland — dado real (nao simulado), 303 pacientes, licenca CC BY 4.0. Variaveis mais relevantes clinicamente: tipo de dor toracica, frequencia cardiaca maxima, depressao do segmento ST, numero de vasos por fluoroscopia (maior poder discriminativo nesta base), alem dos fatores de risco classicos (idade, sexo, colesterol, pressao em repouso). Justificativa individual de cada variavel e as decisoes de tratamento (auséncias preservadas, alvo em duas formas) em [`document/fase-01/dados-numericos.md`](document/fase-01/dados-numericos.md). Dados completos (CSV + XLSX) tambem no [Google Drive](https://drive.google.com/drive/folders/1eTMQ1dnlVJRoTAAd39kqipLyDX-iuLCB?usp=drive_link).
 
 ### Parte 2 - Dados Textuais (NLP)
 
@@ -73,7 +73,7 @@ Referencia apresentada no enunciado:
     - classificacao de topicos
 - Justificar relevancia dessas analises no contexto de IA aplicada a saude.
 
-**Entregue**: 2 textos em `assets/textos/` — um tecnico-cientifico (SciELO, Arquivos Brasileiros de Cardiologia, 1.608 palavras, CC BY-NC 3.0) e um de comunicacao em saude publica (Ministerio da Saude, 858 palavras, CC BY-ND 3.0). O contraste de registro entre os dois e o proprio exemplo do problema que a Fase 5 (chatbot) precisa resolver: traduzir termo clinico para linguagem de paciente. Analise de sentimento nao se aplica a nenhum dos dois (nenhum e relato de paciente) — o corpus serve de baseline de vocabulario. Detalhe das 3 tecnicas de NLP com exemplo real de cada texto em [`document/fase-01/dados-textuais.md`](document/fase-01/dados-textuais.md).
+**Entregue**: 2 textos em `assets/textos/` — um tecnico-cientifico (SciELO, Arquivos Brasileiros de Cardiologia, 1.608 palavras, CC BY-NC 3.0) e um de comunicacao em saude publica (Ministerio da Saude, 858 palavras, CC BY-ND 3.0). O contraste de registro entre os dois e o proprio exemplo do problema que a Fase 5 (chatbot) precisa resolver: traduzir termo clinico para linguagem de paciente. Analise de sentimento nao se aplica a nenhum dos dois (nenhum e relato de paciente) — o corpus serve de baseline de vocabulario. Detalhe das 3 tecnicas de NLP com exemplo real de cada texto em [`document/fase-01/dados-textuais.md`](document/fase-01/dados-textuais.md). Textos disponiveis tanto versionados em `assets/textos/` quanto no [Google Drive](https://drive.google.com/drive/folders/1IKF4nawS7BT8J5obI0AqoAviMeqFcsh1?usp=drive_link).
 
 ### Parte 3 - Dados Visuais (Visao Computacional)
 
@@ -85,7 +85,7 @@ Referencia apresentada no enunciado:
     - reconhecimento de anomalias
 - Destacar importancia dessas analises para solucoes de IA em saude.
 
-**Entregue**: ECG Images dataset of Cardiac Patients v2 (Mendeley Data, CC BY 4.0). Do dataset completo (928 arquivos), apenas 491 sao imagens de conteudo unico por hash MD5 (47% de redundancia, medida nao estimada) — deduplicado antes de qualquer amostragem. Selecao final: 120 imagens, balanceadas 30/30/30/30 por categoria, semente fixa, sem recompressao. Justificativa de deteccao de bordas/padroes/anomalias e o achado de *shortcut learning* (hash raso confundiu template do aparelho com conteudo clinico) em [`document/fase-01/dados-visuais.md`](document/fase-01/dados-visuais.md).
+**Entregue**: ECG Images dataset of Cardiac Patients v2 (Mendeley Data, CC BY 4.0). Do dataset completo (928 arquivos), apenas 491 sao imagens de conteudo unico por hash MD5 (47% de redundancia, medida nao estimada) — deduplicado antes de qualquer amostragem. Selecao final: 120 imagens, balanceadas 30/30/30/30 por categoria, semente fixa, sem recompressao. Justificativa de deteccao de bordas/padroes/anomalias e o achado de *shortcut learning* (hash raso confundiu template do aparelho com conteudo clinico) em [`document/fase-01/dados-visuais.md`](document/fase-01/dados-visuais.md). Conjunto completo de 120 imagens no [Google Drive](https://drive.google.com/drive/folders/12YhReksoB8K-aWQsubtUIaEx4zK9EuF3?usp=drive_link).
 
 ## 📦 Entregaveis obrigatorios
 
@@ -95,7 +95,7 @@ O repositorio deve conter:
 2. Subpasta com conteudos textuais (assets e/ou document).
 3. Links publicos acessiveis com os conjuntos completos de dados numericos e visuais.
 
-Status: itens 1 e 2 entregues (documentacao completa em `document/fase-01/`; textos em `assets/textos/`). Item 3 pendente — ver TODOs na secao "Links publicos da Entrega 1" acima.
+Status: os 3 itens entregues (documentacao completa em `document/fase-01/`; textos em `assets/textos/`; links publicos na secao "Links publicos da Entrega 1" acima).
 
 ## ⚠️ Orientacoes importantes da atividade
 
@@ -134,19 +134,15 @@ Organizacao adotada (dentro do padrao atual do template, sem pastas novas na rai
 
 ## 🔗 Links publicos da Entrega 1
 
-Os arquivos ja estao prontos (ver `document/datasets/processed/` e a pasta
-externa gerada por `scripts/fase-01/05_organiza_imagens.py`); falta apenas
-publicar e colar os links abaixo. Testar cada um em janela anonima antes de
-considerar a fase pronta.
+Pasta-mae com todo o conteudo da Fase 1 no Google Drive:
+[CardioIA - Fase 1](https://drive.google.com/drive/folders/1kKpAlFfaA06UMaPxirurEwRaDQi6ySbg?usp=drive_link)
 
-- **Dataset numerico — CSV** (303 linhas):
-  > ⚠️ TODO(humano): colar aqui o link publico (Drive/OneDrive) do `.csv`
-- **Dataset numerico — XLSX** (mesmo conteudo, outro formato — pode ser o mesmo link acima se hospedados juntos):
-  > ⚠️ TODO(humano): colar aqui o link publico do `.xlsx`, ou apagar esta linha se o link do CSV ja cobre os dois arquivos
+- **Dataset numerico — CSV e XLSX** (303 linhas, os dois formatos na mesma pasta):
+  [Google Drive](https://drive.google.com/drive/folders/1eTMQ1dnlVJRoTAAd39kqipLyDX-iuLCB?usp=drive_link)
 - **Imagens** (120 selecionadas, ~76 MB):
-  > ⚠️ TODO(humano): colar aqui o link publico (Drive/OneDrive) do conjunto de imagens de ECG
-- **Fontes textuais (.txt)**: ja versionadas em `assets/textos/` neste repositorio (nao depende de link externo para atender o enunciado); hospedar externamente e opcional:
-  > ⚠️ TODO(humano): colar aqui um link publico adicional, se o grupo decidir hospedar tambem fora do repositorio
+  [Google Drive](https://drive.google.com/drive/folders/12YhReksoB8K-aWQsubtUIaEx4zK9EuF3?usp=drive_link)
+- **Fontes textuais (.txt)**: disponiveis de duas formas — versionadas neste repositorio em `assets/textos/`, e tambem no
+  [Google Drive](https://drive.google.com/drive/folders/1IKF4nawS7BT8J5obI0AqoAviMeqFcsh1?usp=drive_link) (util para quem preferir baixar sem clonar o repositorio).
 
 
 ## 📁 Estrutura de pastas

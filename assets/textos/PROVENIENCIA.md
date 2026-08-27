@@ -33,7 +33,7 @@ onde a fonte não expõe um campo, está marcado como `TODO(humano)`.
 - **Fonte**: Ministério da Saúde — Saúde de A a Z
 - **URL**: https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/h/hipertensao
 - **Licença**: Todo o conteúdo deste site está publicado sob a licença Creative Commons Atribuição-SemDerivações 3.0 Não Adaptada. (https://creativecommons.org/licenses/by-nd/3.0/deed.pt_BR)
-- **Data de publicação/última atualização**: TODO(humano) — não encontramos campo de data associado a este conteúdo na página (sem `<time>`, sem meta `citation_*`, sem `dateModified`/`datePublished` em JSON-LD); se a rubrica exigir, confirmar via Wayback Machine ou contato direto com o Ministério da Saúde.
+- **Data de publicação/última atualização**: a página-fonte não expõe data de publicação nem de atualização (verificado: sem `<time>`, sem meta `citation_*`, sem `dateModified`/`datePublished` em JSON-LD) — a data de acesso abaixo é a referência temporal disponível.
 - **Data de acesso**: 2026-08-27
 - **Nº de palavras (contado, `texto.split()`)**: 858
 - **Nº de caracteres (contado, `len(texto)`)**: 5547
