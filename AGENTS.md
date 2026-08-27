@@ -29,8 +29,8 @@ Consequências práticas, que valem como regra:
 
 | Campo | Valor |
 |---|---|
-| **Fase em andamento** | **Fase 1 — Batimentos de Dados** |
-| Fases concluídas | nenhuma |
+| **Fase em andamento** | nenhuma |
+| Fases concluídas | **Fase 1 — Batimentos de Dados** (dado coletado, tratado e documentado nas três partes; pendente apenas ação humana — publicar os links externos do dataset numérico e das imagens, ver TODOs no `README.md` e em `document/fase-01/autoavaliacao.md`) |
 | Ambiente | VS Code local, repositório já criado a partir do template FIAP e conectado ao GitHub |
 | Idioma dos entregáveis | **Português do Brasil** |
 
@@ -215,19 +215,26 @@ O enunciado cobra explicitamente os conceitos iniciais de Governança de Dados e
 
 ### 5.5 Definition of Done da Fase 1
 
-Só considerar a fase pronta quando **todos** os itens estiverem verdadeiros:
+Só considerar a fase pronta quando **todos** os itens estiverem verdadeiros.
+Status verificado em 2026-08-27 (caminhos corrigidos abaixo — a versão
+anterior desta lista referenciava `data/` e `docs/`, pastas que a seção 3
+não usa mais desde a correção da árvore de diretórios):
 
-- [ ] Dataset em `data/processed/` em `.csv` **e** `.xlsx`, com **≥ 100 linhas** (contagem verificada por script, não estimada).
-- [ ] `data/dicionario-de-dados.md` com variável, tipo, unidade, faixa válida e significado clínico de cada coluna.
-- [ ] Script reprodutível de coleta/tratamento em `scripts/fase-01/`, rodando de ponta a ponta sem erro em ambiente limpo.
-- [ ] **≥ 2** arquivos `.txt` em `docs/textos/`, em UTF-8, com proveniência registrada.
-- [ ] **≥ 100** imagens organizadas e hospedadas, com `manifest.csv` (nome do arquivo, categoria, dimensões, origem) versionado no repositório.
-- [ ] ~12 imagens de amostra em `assets/imagens/amostras/`.
-- [ ] Links públicos testados **em janela anônima** e funcionando sem login.
-- [ ] `README.md` da raiz cobrindo as três partes, com as justificativas clínicas e de IA exigidas, e integrado ao template FIAP sem quebrá-lo.
-- [ ] `docs/fase-01/governanca-e-vies.md` completo.
-- [ ] Nenhum TODO de link pendente.
-- [ ] Autoavaliação escrita contra a rubrica da seção 5.2, critério por critério.
+- [x] Dataset em `document/datasets/processed/` em `.csv` **e** `.xlsx`, com **≥ 100 linhas** (303, contagem verificada por script, não estimada).
+- [x] `document/datasets/dicionario-de-dados.md` com variável, tipo, unidade, faixa válida e significado clínico de cada coluna.
+- [x] Script reprodutível de coleta/tratamento em `scripts/fase-01/`, rodando de ponta a ponta sem erro em ambiente limpo (testado em venv Python 3.12 recriado do zero).
+- [x] **≥ 2** arquivos `.txt` em `assets/textos/`, em UTF-8, com proveniência registrada (2 arquivos, `PROVENIENCIA.md`).
+- [x] **≥ 100** imagens organizadas (120), com `manifest-imagens.csv` (nome do arquivo, categoria, dimensões, origem, hash e aliases) versionado no repositório — **mas ainda não hospedadas**: o conjunto completo existe só localmente, upload pendente (ver item seguinte).
+- [x] ~12 imagens de amostra em `assets/imagens/amostras/`.
+- [ ] Links públicos testados **em janela anônima** e funcionando sem login — **pendente**: links do dataset numérico e das imagens ainda não publicados.
+- [x] `README.md` da raiz cobrindo as três partes, com as justificativas clínicas e de IA exigidas, e integrado ao template FIAP sem quebrá-lo.
+- [x] `document/fase-01/governanca-e-vies.md` completo.
+- [ ] Nenhum TODO de link pendente — **falso no momento**: ver lista completa de TODOs em `document/fase-01/autoavaliacao.md` e no `README.md`.
+- [x] Autoavaliação escrita contra a rubrica da seção 5.2, critério por critério (`document/fase-01/autoavaliacao.md`).
+
+**8 de 11 itens verdadeiros.** Os 3 pendentes dependem só de ação humana
+(publicar 2-3 links e testá-los) — nenhum trabalho de coleta, tratamento ou
+documentação está em aberto.
 
 ---
 
