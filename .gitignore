@@ -13,6 +13,11 @@
 !document/datasets/processed/*.csv
 !document/datasets/processed/*.xlsx
 
+# Fase 2 — dado primario autoral sintetico (frases, mapa de conhecimento,
+# frases rotuladas). Nao e raw nem processed; pasta propria, ver
+# document/datasets/fase-02/README.md. So .csv: nenhuma planilha nesta pasta.
+!document/datasets/fase-02/*.csv
+
 # Python
 __pycache__/
 *.py[cod]
