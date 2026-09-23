@@ -28,6 +28,8 @@ Grupo Zion
 
 ## 📜 Descrição
 
+Este repositório é o **monorepo incremental do CardioIA**: reúne as entregas de todas as fases do projeto, e as fases posteriores reaproveitam o que as anteriores produziram. Cada entrega tem seu bloco próprio neste README — [Entrega 1 (Fase 1 — Batimentos de Dados)](#-escopo-da-entrega-1-fase-1) e [Entrega 2 (Fase 2 — Diagnóstico Automatizado)](#-entrega-2--fase-2-diagnóstico-automatizado-ia-no-estetoscópio-digital).
+
 O CardioIA e um projeto academico que conecta tecnologia, ciencia de dados e saude para simular o ecossistema de uma cardiologia moderna. A proposta integra dados clinicos, modelos de Machine Learning, Visao Computacional, IoT e agentes inteligentes para apoiar triagem, diagnostico, monitoramento, assistencia remota e previsoes medicas.
 
 Esta primeira etapa corresponde a Fase 1 - Batimentos de Dados: Mapeando o Coracao Moderno. Nela, o grupo assume o papel de cientista de dados hospitalar para levantar, organizar e compreender dados cardiologicos que servirao de base para as proximas fases do projeto.
