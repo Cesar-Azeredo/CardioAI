@@ -437,6 +437,20 @@ não é criado.
   estilo balanceados com regra de parada (critério, seção 5.1). **Dataset e
   desafio congelados** (SHA-256 no script 06) desde 2026-09-23.
 
+- **Classificador de risco (Parte 2).** Protocolo pré-registrado e commitado
+  sozinho antes do notebook: `document/fase-02/protocolo-classificador.md`
+  (H1–H5 com critério fixado antes). Notebook entregável
+  `notebooks/fase-02/fase-02-tfidf-classificador-risco.ipynb`, executado uma
+  vez numa venv nova (kernel limpo) e salvo com outputs; a seção 9.2 é texto
+  escrito depois da execução. Seção **pós-hoc, não pré-registrada**, adicionada
+  depois; na reexecução as seções 0–8 saíram idênticas à execução 1. Achado
+  principal, **registrado como resultado — sem versão 2 do dataset** (decisão
+  do humano): "mas" (0 alto / 10 baixo) e "eu" (7 / 0) viraram atalhos que a
+  tabela de atalhos do script 06 não via, porque ela excluía stopwords e o
+  classificador as mantém. Lição: a verificação do dado usa a mesma
+  representação do modelo — o script 06 ganhou seção informativa de palavras
+  funcionais por classe.
+
 ### 5bis.5 Decisões ainda em aberto
 
 - Itens "Ir Além".
@@ -509,7 +523,7 @@ Commits pequenos e temáticos. Não juntar coleta de dado, documentação e estr
 
 **Branches:** `main` protegida na prática. Trabalho em `fase-01/<assunto>`, integrado via PR.
 
-**Notebooks:** limpar outputs antes de commitar.
+**Notebooks:** notebook **exploratório** tem os outputs limpos antes de commitar. Notebook **entregável** (o que o corretor avalia, ex.: `notebooks/fase-02/fase-02-tfidf-classificador-risco.ipynb`) é commitado **executado** — rodado de cima a baixo num kernel limpo — porque o corretor precisa ver os resultados no GitHub sem executar.
 
 ---
 
