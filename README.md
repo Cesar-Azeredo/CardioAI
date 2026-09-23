@@ -269,6 +269,69 @@ jupyter nbconvert --to notebook --execute notebooks/fase-02/fase-02-tfidf-classi
 Os recursos da NLTK (stemmer RSLP e stopwords) são baixados pelo extrator para `.cache/nltk_data` e conferidos por SHA-256. **No Google Colab:** abra o notebook pelo badge acima — ele detecta o Colab e lê os CSVs direto do GitHub (branch `main`).
 
 
+## 🫀 Ir Além 2 — Diagnóstico visual de ECG com rede neural (MLP em Keras)
+
+> ⚠️ **Simulação acadêmica, sem validade clínica.** As imagens vêm de uma base pública de um único aparelho, hospital e país. Nada nesta entrega serve para triagem, diagnóstico ou decisão médica real.
+
+Entrega extra da Fase 2 (não faz parte da atividade principal). Uma **MLP em Keras** classifica imagens de eletrocardiograma em **normal** ou **anormal**, depois de pré-processá-las (recorte, tons de cinza, redimensionamento para 128×75, normalização para [0, 1]). As hipóteses foram **pré-registradas antes de qualquer treino** ([protocolo](document/fase-02/ir-alem-2/protocolo-mlp.md)).
+
+### 📦 Entregáveis do Ir Além 2
+
+| Entregável (enunciado) | Arquivo |
+|---|---|
+| Notebook comentado e funcional | [`notebooks/fase-02/ir-alem-2/ir-alem-2-mlp-ecg.ipynb`](notebooks/fase-02/ir-alem-2/ir-alem-2-mlp-ecg.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Cesar-Azeredo/CardioAI/blob/main/notebooks/fase-02/ir-alem-2/ir-alem-2-mlp-ecg.ipynb) |
+| Exemplos de imagens | [`assets/imagens/ir-alem-2/`](assets/imagens/ir-alem-2/) — 4 pares antes/depois do pré-processamento, um por categoria |
+| README explicativo | este bloco · [levantamento dos dados](document/fase-02/ir-alem-2/levantamento.md) · [protocolo](document/fase-02/ir-alem-2/protocolo-mlp.md) |
+| Vídeo no YouTube (não listado), até 4 min | > ⚠️ TODO(humano): colar aqui o link público do vídeo do Ir Além 2 no YouTube (não listado) |
+
+### 🗂 Dataset: por que o Mendeley, e não o Kaggle
+
+Usamos o *ECG Images dataset of Cardiac Patients*, v2, do Mendeley Data (DOI [10.17632/gwbz3fsgp8.2](https://doi.org/10.17632/gwbz3fsgp8.2), CC BY 4.0), a mesma base de imagens da Entrega 1, **no lugar** do `shayanfazeli/heartbeat` do Kaggle recomendado no enunciado. O dataset do Kaggle é de **sinais segmentados em CSV**, não de imagens: não há o que redimensionar nem converter para tons de cinza, e o critério de avaliação pede o pré-processamento correto das imagens. As imagens do Mendeley cumprem o texto do enunciado e reaproveitam a auditoria de duplicatas da Entrega 1.
+
+> ⚠️ **Pendência:** confirmar com o tutor se a substituição é aceita. Se o Kaggle for exigido, o plano B é desenhar cada sinal do CSV como imagem e então pré-processá-la.
+
+Cuidados com o dado, todos por script e documentados no [levantamento](document/fase-02/ir-alem-2/levantamento.md):
+- **Deduplicação por MD5:** dos 928 arquivos, só **491 imagens são únicas** (47% de cópias exatas). O split é feito sobre as únicas; sem isso, a mesma imagem cairia no treino e no teste.
+- **Texto impresso removido por recorte:** cada imagem traz a frequência cardíaca impressa no rodapé, e **nenhuma imagem normal passa de 90 bpm**. A regra "FC impressa > 90 → anormal" é um atalho que a rede poderia aprender lendo o número em vez do traçado. O recorte fica só com a grade do traçado.
+- **Binário:** normal = 142; anormal = infarto (30) + histórico de infarto (86) + batimento anormal (233) = 349. Base **91% masculina**.
+
+### 📊 Resultados
+
+Validação cruzada estratificada 5 dobras × 3 repetições sobre as 491 imagens únicas (média ± desvio-padrão). A **métrica principal é o recall de anormal**: o erro perigoso é o ECG anormal classificado como normal.
+
+| Modelo | Acurácia | Acurácia balanceada | **Recall anormal** | Recall normal |
+|---|---|---|---|---|
+| Baseline (a): classe majoritária | 0,711 | 0,500 | 1,000 | 0,000 |
+| Baseline (b): regra "FC impressa > 90" | 0,743 ± 0,034 | 0,819 ± 0,024 | 0,639 ± 0,049 | 1,000 |
+| **MLP 128×75 com recorte** | **0,831 ± 0,034** | 0,797 ± 0,028 | **0,878 ± 0,057** | 0,716 ± 0,061 |
+
+Recall de anormal por subcategoria (MLP): batimento anormal 0,920 · histórico de infarto 0,822 · **infarto 0,711**. Detalhes, split fixo, matriz de confusão, controle sem recorte e recorte por sexo: [notebook, seções 8 a 12](notebooks/fase-02/ir-alem-2/ir-alem-2-mlp-ecg.ipynb).
+
+- **Um split único engana.** No split fixo, a versão **sem recorte** parecia muito melhor (0,920 contra 0,844 de acurácia balanceada). Na validação cruzada, a diferença some (−0,004 ± 0,031). Com um único split, a conclusão seria a errada: "a rede lê o rodapé".
+- **Acurácia balanceada × clínica.** Pelo critério pré-registrado, a MLP **não superou** a regra do texto impresso na acurácia balanceada (empate). Mas essa métrica pesa falso negativo e falso positivo igualmente, e a clínica não. A regra nunca erra um normal, mas perde 36% dos anormais e pega só 0,23 dos infartos; a MLP pega 0,71. No recall de anormal, a MLP é muito superior (0,878 × 0,639). *(Interpretação pós-execução.)*
+- **O modelo erra mais onde há menos dado:** no infarto, com 30 imagens únicas (recall 0,711), e nas mulheres, com 44 imagens, das quais metade das normais sai como anormal. Com n = 15 normais femininas, isso é hipótese, não conclusão. É o mesmo padrão da base Cleveland da Entrega 1 (68% masculina); esta base é 91% masculina.
+
+### 🔧 Como executar o Ir Além 2
+
+Pré-requisito: Python 3.12. O TensorFlow fica num arquivo de dependências separado, para quem roda só as Entregas 1 e 2 não precisar instalá-lo.
+
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install -r requirements-ir-alem-2.txt   # inclui o requirements.txt + TensorFlow 2.21.0 / Keras 3.13.2
+
+# Notebook de ponta a ponta (baixa o zip do Mendeley, ~194 MB, para ~/.cache/cardioia/)
+jupyter nbconvert --to notebook --execute notebooks/fase-02/ir-alem-2/ir-alem-2-mlp-ecg.ipynb --output /tmp/ir-alem-2-executado.ipynb
+
+# Opcional: scripts de preparação (o manifest já está versionado)
+python scripts/fase-02/ir-alem-2/01_baixa_ecg_mendeley.py
+python scripts/fase-02/ir-alem-2/02_deduplica_e_monta_binario.py
+python scripts/fase-02/ir-alem-2/03_audita_texto_impresso.py
+```
+
+**No Google Colab:** abra o notebook pelo badge acima. Ele detecta o Colab, clona o repositório (branch `main`) e baixa as imagens pelo mesmo script de download. Os resultados podem diferir levemente entre a CPU local e a GPU do Colab.
+
+
 ## 🗃 Histórico de lançamentos
 
 * 0.5.0 - XX/XX/2024
