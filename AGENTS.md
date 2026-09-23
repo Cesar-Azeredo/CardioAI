@@ -1,8 +1,7 @@
 # AGENTS.md — Contexto operacional do projeto CardioIA
 
-> **Este arquivo e o `CLAUDE.md` na raiz têm conteúdo idêntico.**
-> `CLAUDE.md` é lido pelo Claude Code; `AGENTS.md` é lido pelo GitHub Copilot, Cursor, Codex e afins.
-> **Se você alterar um, replique a alteração no outro na mesma tarefa.** Não deixe os dois divergirem.
+> **Este arquivo é a fonte única do contexto do projeto.** É lido diretamente pelo GitHub Copilot, Cursor, Codex e afins.
+> O `CLAUDE.md` da raiz contém apenas `@AGENTS.md` — ele importa este arquivo para o Claude Code, como recomenda a documentação oficial do Claude Code para repositórios que usam `AGENTS.md` (code.claude.com/docs/en/memory). Edite só este arquivo.
 
 ---
 
@@ -29,7 +28,7 @@ Consequências práticas, que valem como regra:
 
 | Campo | Valor |
 |---|---|
-| **Fase em andamento** | nenhuma |
+| **Fase em andamento** | **Fase 2 — Diagnóstico Automatizado** — todos os entregáveis prontos e integrados na `main` (merge `--no-ff` da branch `fase-02/nlp-triagem`, 2026-09-23); **falta só o vídeo** (ver 5bis.6) |
 | Fases concluídas | **Fase 1 — Batimentos de Dados** (dado coletado, tratado e documentado nas três partes; links públicos publicados no Google Drive) |
 | Ambiente | VS Code local, repositório já criado a partir do template FIAP e conectado ao GitHub |
 | Idioma dos entregáveis | **Português do Brasil** |
@@ -40,12 +39,12 @@ Consequências práticas, que valem como regra:
 
 ## 3. Estrutura de diretórios
 
-Esta árvore parte do **template FIAP** já existente no repositório (não substitui nada dele). `[F1]` = criado/preenchido na Fase 1; `[futuro]` = reservado para próximas fases; `[template]` = já existia antes da Fase 1 e permanece como está.
+Esta árvore parte do **template FIAP** já existente no repositório (não substitui nada dele). `[F1]` = criado/preenchido na Fase 1; `[F2]` = criado na Fase 2; `[futuro]` = reservado para próximas fases; `[template]` = já existia antes da Fase 1 e permanece como está.
 
 ```
 CardioIA/
 ├── AGENTS.md                          # este arquivo                         [F1]
-├── CLAUDE.md                          # cópia idêntica deste arquivo         [F1]
+├── CLAUDE.md                          # só `@AGENTS.md` (importa este arquivo) [F1]
 ├── README.md                          # ENTREGÁVEL AVALIADO — template FIAP  [F1]
 ├── requirements.txt                                                          [F1]
 ├── .gitignore                                                                [F1]
@@ -54,6 +53,7 @@ CardioIA/
 │   ├── logo-fiap.png                                                    [template]
 │   ├── mapa-mental/                   # SVG/PNG do mapa mental da jornada    [F1]
 │   ├── textos/                        # ENTREGÁVEL: os .txt para NLP         [F1]
+│   │   └── fase-02/                   # fontes do mapa (gov.br) + frases     [F2]
 │   └── imagens/
 │       ├── amostras/                  # ~12 imagens leves p/ ilustrar README [F1]
 │       └── LEIA-ME.md                 # explica que o conjunto está no Drive [F1]
@@ -66,6 +66,7 @@ CardioIA/
 │   ├── datasets/
 │   │   ├── raw/                       # dado como baixado, sem tratamento     [F1]
 │   │   ├── processed/                 # dataset final .csv e .xlsx            [F1]
+│   │   ├── fase-02/                   # dado primário autoral sintético .csv  [F2]
 │   │   ├── dicionario-de-dados.md     # variável, tipo, unidade, faixa        [F1]
 │   │   └── README.md                  # proveniência: fonte, licença, DOI...  [F1]
 │   ├── fase-01/
@@ -73,17 +74,22 @@ CardioIA/
 │   │   ├── dados-textuais.md                                                  [F1]
 │   │   ├── dados-visuais.md                                                   [F1]
 │   │   └── governanca-e-vies.md                                               [F1]
-│   ├── fase-02/ ... fase-07/                                            [futuro]
+│   ├── fase-02/                       # governança, decisões, autoavaliação   [F2]
+│   ├── fase-03/ ... fase-07/                                            [futuro]
 │   └── other/
 │       └── readme.md                                                    [template]
 │
 ├── notebooks/
-│   ├── fase-01/                       # EDA do dataset numérico              [F1]
-│   └── fase-02/ ...                                                     [futuro]
+│   ├── fase-01/                       # vazia (só .gitkeep) — a EDA da Fase 1
+│   │                                  # foi feita por script, não notebook:
+│   │                                  # scripts/fase-01/02_perfila_...py     [F1]
+│   ├── fase-02/                       # TF-IDF + classificador de risco      [F2]
+│   └── fase-03/ ...                                                     [futuro]
 │
 ├── scripts/
 │   ├── readme.md                                                        [template]
-│   └── fase-01/                       # coleta, tratamento, validação        [F1]
+│   ├── fase-01/                       # coleta, tratamento, validação        [F1]
+│   └── fase-02/                       # coleta das fontes, extrator          [F2]
 │
 └── src/
     ├── readme.md                                                        [template]
@@ -237,6 +243,245 @@ publicação dos 4 links no Google Drive:
 
 ---
 
+## 5bis. Fase 2 — Diagnóstico Automatizado (IA no Estetoscópio Digital)
+
+**Papel assumido:** construir um primeiro módulo de triagem por linguagem
+natural — o paciente descreve o que sente, o sistema extrai sintomas, cruza
+com um mapa de conhecimento e sugere diagnóstico e nível de risco.
+
+### 5bis.1 Enunciado — resumo
+
+> O texto literal do enunciado não está registrado neste arquivo. O resumo
+> abaixo foi montado a partir da lista de entregáveis e da rubrica informadas
+> pelo humano em 2026-09-23. Se o enunciado literal for colado depois, ele
+> prevalece sobre este resumo.
+
+**Entregáveis obrigatórios:**
+
+1. `.txt` com **10 frases** de sintomas relatados por pacientes.
+2. `.csv` com **mapa de conhecimento sintoma → doença**.
+3. **Código Python** que lê as frases, extrai sintomas e sugere diagnóstico.
+4. `.csv` com **frases rotuladas em alto/baixo risco**.
+5. `.ipynb` com **TF-IDF, classificador e avaliação**.
+6. **`README.md` atualizado** e **vídeo de até 4 min no YouTube (não listado)**, com link no GitHub.
+
+Itens "Ir Além": **não decididos**. Não entram no plano nem no DoD até
+decisão do humano. Se entrarem, o lugar é `notebooks/fase-02/ir-alem-*.ipynb`
+e `document/fase-02/ir-alem.md`.
+
+### 5bis.2 Rubrica de avaliação (10 pontos) — otimizar contra isto
+
+| Critério | Pontos |
+|---|---|
+| Relatos e mapa de conhecimento organizados | **2** |
+| Código de extração de informações funcional | **2** |
+| Dataset simples criado corretamente | **1** |
+| Classificador treinado e testado corretamente | **2** |
+| Documentação clara e repositório público com README completo | **1** |
+| Vídeo de demonstração no YouTube (não listado) com link no GitHub | **2** |
+
+Leitura da rubrica: **2 dos 10 pontos dependem só do vídeo**, que é trabalho
+humano (gravar, publicar, colar o link). O vídeo precisa mostrar o extrator
+rodando e o notebook avaliando — é demonstração, não slide.
+
+### 5bis.3 Decisões registradas (2026-09-23)
+
+**Decisão 1 — Fontes do mapa de conhecimento.** Fontes verificadas pelo
+humano; não substituir nem acrescentar outras:
+
+| Doença | Fonte | Situação |
+|---|---|---|
+| Hipertensão | `assets/textos/texto_02_hipertensao-pressao-alta-ministerio-saude.txt` (Fase 1) | já no repositório |
+| Infarto | `https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/i/infarto` | coletado → `assets/textos/fase-02/texto_03_infarto-ministerio-saude.txt` |
+| AVC | `https://www.gov.br/saude/pt-br/assuntos/saude-de-a-a-z/a/avc` | coletado → `assets/textos/fase-02/texto_04_avc-ministerio-saude.txt` |
+| Infarto (complementar) | `https://bvsms.saude.gov.br/ataque-cardiaco-infarto/` | **fora do escopo** |
+| AVC (complementar) | `https://bvsms.saude.gov.br/avc-acidente-vascular-cerebral/` | **fora do escopo** |
+
+**Fontes complementares da BVS inacessíveis (HTTP 503 em todo o domínio,
+verificado por script e navegador em 2026-09-23), retiradas do escopo**
+(decisão do humano em 2026-09-23). O gov.br é a fonte primária das duas
+doenças; o script de coleta não tenta mais a BVS.
+
+O mapa cobre **três doenças: hipertensão, infarto e AVC**. **Lacuna
+documentada, não preenchida:** não há página equivalente do Ministério da
+Saúde para insuficiência cardíaca nem para angina — só fontes de hospital
+privado, sem o mesmo peso institucional. Decisão de governança: **três
+doenças com proveniência oficial valem mais que cinco com metade sem fonte
+verificável.** O enunciado cita IC e angina só como exemplo de formato, não
+como requisito. Registrar em `document/fase-02/`.
+
+As páginas do gov.br são **CC BY-ND 3.0**, mesma restrição do Texto 2:
+salvas sem alterar conteúdo (a página de infarto repete itens da própria
+lista de sintomas — repetição mantida, registrada em
+`assets/textos/fase-02/PROVENIENCIA.md`). As frases de paciente são redação
+própria, não paráfrase dessas páginas.
+
+**Decisão 2 — CSVs da Fase 2 em `document/datasets/fase-02/`**, com README
+próprio, e não em `processed/`. Motivo: `processed/` significa "derivado de
+pipeline a partir de `raw/`"; os artefatos da Fase 2 são **dado primário
+autoral sintético** — nem raw nem processed. `.gitignore` estendido com
+`!document/datasets/fase-02/*.csv` (a negação de `processed/` foi adicionada
+pelo grupo na Fase 1, não é regra do template; as quatro regras globais do
+template ficam intactas). Comprovado com `git add --dry-run`.
+
+**Decisão 3 — Dado autoral vs. regra 4.** Frases, rótulos e mapa são **dado
+primário sintético autoral**, com ficha de proveniência (autores, data,
+critério de rotulagem, critério de redação). A regra 4 proíbe *transformar*
+dado à mão; aqui o arquivo é a origem. **Todo derivado sai de script.**
+Exceção e motivo registrados em `document/fase-02/`.
+
+**Decisão 4 — Compromissos da Fase 1** (tabela de mitigações de
+`document/fase-01/governanca-e-vies.md`). **Não fingir cumprimento.**
+
+- *Compromisso 1 — métricas estratificadas, não só acurácia global:*
+  **transfere em espírito** para o classificador de texto. O notebook **deve**
+  reportar matriz de confusão, recall e F1 por classe, com destaque para o
+  **recall de "alto risco"**, e explicar por que acurácia global é
+  insuficiente aqui, retomando a assimetria de custo da Fase 1.
+- *Compromisso 2 — imputação de `ca`/`thal` dentro do fold:* **adiado
+  formalmente**, porque nenhum entregável da Fase 2 modela o UCI. Registrar
+  em `document/fase-02/` e atualizar `document/datasets/dicionario-de-dados.md`
+  (hoje diz que `alvo_binario` é "o alvo principal previsto para a Fase 2" —
+  desatualizado), apontando para a **Fase 6**, primeira fase do roadmap que
+  consome o dataset numérico.
+
+**Decisão 5 — `README.md`:** bloco "Entrega 2" **em paralelo** ao da Entrega
+1, sem tocar no da Entrega 1, e linha `0.2.0` no histórico de lançamentos.
+
+**Decisão 6 — Árvore da seção 3:** anunciava EDA em `notebooks/fase-01/`,
+mas a pasta está vazia. **Corrigida a árvore** para a realidade; o notebook
+não é criado.
+
+### 5bis.4 Convenções técnicas da Fase 2
+
+- Dependências novas: `scikit-learn==1.6.1` e `scipy==1.16.3`, versões do
+  `pip-freeze` oficial do Colab (commit de 2026-09-21), wheel cp312,
+  instalação testada em venv limpa.
+- **numpy segue em `2.0.2`** (o Colab está em `2.1.3`). Critério do humano:
+  subir só se os scripts 01–05 da Fase 1, regerados em venv limpa com a
+  versão nova, produzirem artefatos **byte-idênticos** aos versionados.
+  Resultado (2026-09-23): CSV, `.txt`, `PROVENIENCIA.md`, manifest, 12
+  amostras e 120 selecionadas idênticos; o `.xlsx` diverge **só** em
+  `docProps/core.xml` (carimbo de data/hora do openpyxl) — e diverge igual
+  no controle com `2.0.2`. O critério byte-idêntico estava mal especificado
+  (o `.xlsx` carrega carimbo de criação e diverge com qualquer versão); a
+  regressão de **conteúdo** passou. **Decisão encerrada: numpy fica em
+  `2.0.2`** — a subida não traz benefício, porque no Colab o notebook usa o
+  numpy do próprio Colab. Registrado em `document/fase-02/governanca-e-vies.md`.
+- Textos coletados por `scripts/fase-02/00_coleta_fontes_mapa.py`, que prova a
+  cada execução que o `.txt` tem exatamente as palavras da página (cláusula ND).
+  Proveniência em `assets/textos/fase-02/PROVENIENCIA.md` — arquivo separado
+  do da Fase 1, que é gerado por outro script e não é tocado.
+
+- **`.csv` rotulado: 80 frases, 40 alto risco e 40 baixo risco** (decisão do
+  humano em 2026-09-23). Conjunto próprio, distinto das 10 frases do `.txt`.
+- **Mapa:** `document/datasets/fase-02/mapa-conhecimento-sintomas.csv`. As três
+  primeiras colunas são **literalmente** `Sintoma 1`, `Sintoma 2`,
+  `Doença Associada` (estrutura mostrada no enunciado); as de proveniência
+  (`tipo_termo`, `fonte`, `trecho_literal`, `observacao`) vêm depois.
+  **Cada linha é um conceito de sintoma com um sinônimo** (como nos exemplos
+  do enunciado: "dor no peito", "aperto no tórax" → Infarto) — não um par de
+  sintomas diferentes. Sintoma 1 é sempre termo literal da página;
+  `tipo_termo` descreve Sintoma 2 (`literal` ou `variante_leiga`); um
+  conceito pode ter várias linhas, uma por sinônimo. Correção de erro de
+  digitação da fonte ("da falar" → "da fala") só com o texto original
+  preservado em `trecho_literal` e a correção declarada em `observacao`.
+  Conceito compartilhado entre doenças tem uma linha por doença. Tudo
+  verificado por `scripts/fase-02/01_verifica_mapa_e_frases.py`. **Mapa
+  congelado** desde 2026-09-23 (53 linhas, 26 conceitos; SHA-256 conferido):
+  não recebe variantes para acertar frases de teste — melhorias legítimas
+  estão no método de casamento, e só valem se decididas antes de rodar nas
+  frases.
+- **10 frases = casos de teste do extrator**, com gabarito em
+  `document/fase-02/`: 2 infarto, 2 AVC, 2 hipertensão, 1 sintoma
+  compartilhado, 1 só variante leiga, 1 negação, 1 infarto atípico (idoso ou
+  diabético sem dor no peito). **Frases congeladas** desde 2026-09-23: não
+  mudam para acomodar o extrator (o verificador confere o SHA-256); falha em
+  linguagem natural é resultado a reportar.
+- **Extrator reporta quantos sintomas casou e um nível de confiança.** Não se
+  adota número mínimo de sintomas para forçar ou evitar falha. Esperado da
+  frase 10: "Infarto, baixa confiança (1 sintoma)"; a falha perigosa desse
+  perfil (frase sem "dor" → baixo risco) é demonstrada na Parte 2, no
+  classificador de risco.
+
+- **Protocolo do extrator pré-registrado e congelado** em
+  `document/fase-02/protocolo-extrator.md` (SHA-256 conferido pelo
+  verificador): RSLP (`nltk==3.9.1`, recursos em `.cache/nltk_data` conferidos
+  por hash — divergência vira aviso, não interrupção), proximidade ordenada
+  com intervalo de 2, negação estilo NegEx, sobreposição por termo mais longo,
+  localização só com dor na oração, pontuação por conceito, níveis de
+  confiança fixos. Extrator: `scripts/fase-02/02_extrai_sintomas_sugere_diagnostico.py`;
+  testes U1–U14: `scripts/fase-02/03_testa_extrator.py`. Execução única nas
+  10 frases feita em 2026-09-23 → `document/fase-02/resultado-extrator.md`
+  (baseline exato 8/10, método 9/10; nas 7 frases não contaminadas, 6/7 os
+  dois). Rodar de novo nas frases só por bug, reportando os dois resultados.
+
+- **Adendo pós-execução** (`document/fase-02/adendo-pos-execucao.md`),
+  sem descongelar o protocolo: U15 em arquivo próprio
+  (`scripts/fase-02/04_testa_extrator_adendo.py`) fecha a lacuna de cobertura
+  achada pela checagem de mutação (`05_checa_mutacao_testes.py`: 5/5
+  mutações pegas); limitação documentada — a oração que limita a negação
+  também limita o casamento (frase 9); explicações da divergência em
+  `document/fase-02/explicacoes-divergencia.md` (autoria humana), mescladas
+  pelo gerador — rodar o extrator ao vivo não apaga nada.
+- **Parte 2 — dataset rotulado.** Critério registrado antes das frases em
+  `document/fase-02/criterio-rotulo-risco.md`: alto risco = ≥1 sinal de
+  alerta das páginas de infarto/AVC (códigos I1–I7, A1–A6, com trecho
+  literal); baixo risco = queixa leve sem sinal de alerta presente e com
+  exclusões de segurança. **Zona cinzenta** (só hipertensão) fora do treino,
+  só no desafio com rótulo `indefinido` — limitação: a acurácia medida
+  superestima o uso real. Arquivos: `frases-rotuladas-risco.csv` (80, 40/40,
+  cabeçalho `frase,situacao`) e `desafio-risco.csv` (18, fora do treino, com 3 pares contrafactuais de gênero).
+  Verificação: `scripts/fase-02/06_verifica_dataset_risco.py`. Voz de gênero
+  balanceada por classe (≥6 F e ≥6 M; coluna `marcador_genero`), atalhos de
+  estilo balanceados com regra de parada (critério, seção 5.1). **Dataset e
+  desafio congelados** (SHA-256 no script 06) desde 2026-09-23.
+
+- **Classificador de risco (Parte 2).** Protocolo pré-registrado e commitado
+  sozinho antes do notebook: `document/fase-02/protocolo-classificador.md`
+  (H1–H5 com critério fixado antes). Notebook entregável
+  `notebooks/fase-02/fase-02-tfidf-classificador-risco.ipynb`, executado uma
+  vez numa venv nova (kernel limpo) e salvo com outputs; a seção 9.2 é texto
+  escrito depois da execução. Seção **pós-hoc, não pré-registrada**, adicionada
+  depois; na reexecução as seções 0–8 saíram idênticas à execução 1. Achado
+  principal, **registrado como resultado — sem versão 2 do dataset** (decisão
+  do humano): "mas" (0 alto / 10 baixo) e "eu" (7 / 0) viraram atalhos que a
+  tabela de atalhos do script 06 não via, porque ela excluía stopwords e o
+  classificador as mantém. Lição: a verificação do dado usa a mesma
+  representação do modelo — o script 06 ganhou seção informativa de palavras
+  funcionais por classe.
+
+### 5bis.5 Decisões ainda em aberto
+
+- Itens "Ir Além".
+
+### 5bis.6 Definition of Done da Fase 2
+
+Só considerar a fase pronta quando **todos** os itens estiverem verdadeiros.
+
+- [x] Branch `fase-02/nlp-triagem` e estrutura de pastas criadas (`assets/textos/fase-02/`, `document/datasets/fase-02/`, `document/fase-02/`, `scripts/fase-02/`, `notebooks/fase-02/`).
+- [x] `.gitignore` estendido para `document/datasets/fase-02/*.csv`, comprovado com `git add --dry-run`.
+- [x] `scikit-learn` registrado em `requirements.txt` e instalação testada de verdade em venv limpa.
+- [x] Fontes gov.br de infarto e AVC coletadas por script reprodutível, com licença lida da página, contagem de palavras por script e integridade (ND) verificada.
+- [x] Fontes BVS retiradas do escopo por decisão registrada (HTTP 503 em todo o domínio, 2026-09-23).
+- [x] `.csv` do mapa de conhecimento em `document/datasets/fase-02/`, cobrindo hipertensão, infarto e AVC, com **fonte e trecho literal em cada linha** (53 linhas, 26 conceitos, congelado).
+- [x] `.txt` com **10 frases** de paciente, redação própria, sem identificador pessoal, com ficha de redação (congelado).
+- [x] Código Python de extração rodando de ponta a ponta em venv limpa: lê as frases, extrai sintomas, sugere diagnóstico, com aviso de uso exclusivamente acadêmico (U1–U14 + U15 passando).
+- [x] `.csv` de frases rotuladas alto/baixo risco — **80 frases, 40/40** —, com critério de rotulagem escrito e ancorado em fonte; nº de linhas contado por script (congelado; desafio de 18 frases fora do treino).
+- [x] `.ipynb` com TF-IDF, classificador e avaliação — matriz de confusão, recall e F1 por classe, **recall de "alto risco" em destaque**, explicação de por que acurácia global não basta; commitado **executado** (notebook entregável — seção 7). Colab: leitura dos CSVs pela URL raw da `main` conferida por HTTP; **execução no Colab não testada**.
+- [x] `document/datasets/fase-02/README.md` com a ficha de cada arquivo.
+- [x] `document/fase-02/` com: lacuna IC/angina, exceção à regra 4, compromisso 1 transferido, compromisso 2 adiado (`governanca-e-vies.md`), vieses novos da Fase 2 — circularidade autor/rótulo (`protocolo-classificador.md`, `autoavaliacao.md`), n pequeno (`autoavaliacao.md`), negação e variantes lexicais (`gabarito-frases.md`, `adendo-pos-execucao.md`), atalhos "mas"/"eu" (notebook, seção 9).
+- [x] `document/datasets/dicionario-de-dados.md` atualizado (`alvo_binario` → Fase 6).
+- [x] `README.md` com bloco "Entrega 2" em paralelo e linha `0.2.0`, sem alterar o bloco da Entrega 1.
+- [x] Repositório **público** — verificado por HTTP sem autenticação (200) em 2026-09-23; a conferência em janela anônima fica para o humano.
+- [ ] Vídeo de até 4 min no YouTube (não listado), link no `README.md` — conferido em janela anônima.
+- [ ] Nenhum `TODO(humano)` de link pendente.
+
+**16 de 18 itens verdadeiros.** Pendentes, os dois do vídeo: gravar e publicar, e colar o link — o único `TODO(humano)` de link aberto.
+- [x] Autoavaliação contra a rubrica da seção 5bis.2 (`document/fase-02/autoavaliacao.md`).
+
+---
+
 ## 6. Roadmap das fases 2 a 7
 
 Referência para não tomar decisão na Fase 1 que atrapalhe depois.
@@ -249,6 +494,8 @@ Referência para não tomar decisão na Fase 1 que atrapalhe depois.
 | **5** | Suporte Digital ao Paciente — Assistente Cardiológico Virtual | Chatbot para acompanhamento domiciliar; NLP; discussão de ética e empatia no atendimento virtual | **corpus textual** |
 | **6** | Coração Sob Controle — Previsão de Crises com IA | Sistema preditivo de eventos cardíacos por **séries temporais**; prever picos de risco; protocolos de emergência | dataset + dados do wearable |
 | **7** | CardioIA — Plataforma de Inteligência Cardíaca Total | Integração de todos os módulos numa plataforma funcional; foco em usabilidade, fluxo de informação e arquitetura final | tudo |
+
+> **Nota (2026-09-23):** esta tabela foi escrita antes do enunciado da Fase 2 e fica como registro. O enunciado real da Fase 2 é de **NLP** (frases de paciente, extração de sintomas, TF-IDF) e consome o **corpus textual** (Texto 2), não o dataset numérico — ver seção 5bis. Nenhum entregável obrigatório da Fase 2 modela o UCI; a primeira fase do roadmap que o consome é a **Fase 6**.
 
 Implicações para decisões tomadas agora:
 
@@ -278,7 +525,7 @@ Commits pequenos e temáticos. Não juntar coleta de dado, documentação e estr
 
 **Branches:** `main` protegida na prática. Trabalho em `fase-01/<assunto>`, integrado via PR.
 
-**Notebooks:** limpar outputs antes de commitar.
+**Notebooks:** notebook **exploratório** tem os outputs limpos antes de commitar. Notebook **entregável** (o que o corretor avalia, ex.: `notebooks/fase-02/fase-02-tfidf-classificador-risco.ipynb`) é commitado **executado** — rodado de cima a baixo num kernel limpo — porque o corretor precisa ver os resultados no GitHub sem executar.
 
 ---
 
@@ -297,6 +544,5 @@ O repositório é compartilhado por uma equipe; quem escreveu este arquivo deu o
 1. Cumpri as regras invioláveis da seção 4?
 2. Todo dado novo tem proveniência, licença e data de acesso registradas?
 3. Todo link que eu não verifiquei está marcado como `TODO(humano)` e listado na minha resposta?
-4. Alterei `AGENTS.md` ou `CLAUDE.md`? Se sim, os dois estão idênticos?
-5. Se a fase avançou de estado, atualizei a tabela da seção 2?
-6. Listei explicitamente o que ficou pendente para o humano fazer?
+4. Se a fase avançou de estado, atualizei a tabela da seção 2?
+5. Listei explicitamente o que ficou pendente para o humano fazer?

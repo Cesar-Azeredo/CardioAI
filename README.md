@@ -206,6 +206,67 @@ decisões aplicadas) e é idempotente — pode ser rodado de novo sem
 efeito colateral. Detalhe de cada etapa em `document/fase-01/`.
 
 
+## 🩺 Entrega 2 — Fase 2: Diagnóstico Automatizado (IA no Estetoscópio Digital)
+
+> ⚠️ **Simulação acadêmica, sem validade clínica.** Frases, rótulos e mapa de conhecimento são sintéticos ou derivados de páginas públicas do Ministério da Saúde. Nada nesta entrega serve para triagem, diagnóstico ou decisão médica real.
+
+Um paciente descreve o que sente; o sistema **extrai os sintomas** e sugere um diagnóstico (Parte 1) e **classifica o risco** da frase em alto ou baixo (Parte 2). As regras do extrator e as hipóteses do classificador foram **pré-registradas antes de qualquer resultado** e congeladas por SHA-256.
+
+### 📦 Entregáveis da Entrega 2
+
+| Entregável (enunciado) | Arquivo |
+|---|---|
+| `.txt` com 10 frases de sintomas relatados por pacientes | [`assets/textos/fase-02/frases-sintomas-pacientes.txt`](assets/textos/fase-02/frases-sintomas-pacientes.txt) |
+| `.csv` com o mapa de conhecimento sintoma → doença | [`document/datasets/fase-02/mapa-conhecimento-sintomas.csv`](document/datasets/fase-02/mapa-conhecimento-sintomas.csv) |
+| Código Python que lê as frases, extrai sintomas e sugere diagnóstico | [`scripts/fase-02/02_extrai_sintomas_sugere_diagnostico.py`](scripts/fase-02/02_extrai_sintomas_sugere_diagnostico.py) — resultado em [`document/fase-02/resultado-extrator.md`](document/fase-02/resultado-extrator.md) |
+| `.csv` com frases e rótulos (alto/baixo risco) | [`document/datasets/fase-02/frases-rotuladas-risco.csv`](document/datasets/fase-02/frases-rotuladas-risco.csv) |
+| `.ipynb` com TF-IDF, classificação e avaliação | [`notebooks/fase-02/fase-02-tfidf-classificador-risco.ipynb`](notebooks/fase-02/fase-02-tfidf-classificador-risco.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Cesar-Azeredo/CardioAI/blob/main/notebooks/fase-02/fase-02-tfidf-classificador-risco.ipynb) |
+| Repositório público | [github.com/Cesar-Azeredo/CardioAI](https://github.com/Cesar-Azeredo/CardioAI) |
+| Vídeo no YouTube (não listado), até 4 min | > ⚠️ TODO(humano): colar aqui o link público do vídeo no YouTube (não listado) |
+
+Fontes, critério de rótulo e decisões: [mapa e frases](document/datasets/fase-02/README.md) · [critério de rótulo](document/fase-02/criterio-rotulo-risco.md) · [governança e viés](document/fase-02/governanca-e-vies.md) · [autoavaliação](document/fase-02/autoavaliacao.md).
+
+### 📊 Resultados
+
+**Parte 1 — extrator** ([protocolo](document/fase-02/protocolo-extrator.md) · [resultado](document/fase-02/resultado-extrator.md) · [gabarito](document/fase-02/gabarito-frases.md)). Nas 10 frases de teste, o casamento exato (baseline) acertou **8/10** e o método (RSLP + proximidade + negação) **9/10**. Nas 7 frases não contaminadas pelo conhecimento prévio, **empate em 6/7**: a melhora vem inteira da frase 3, que já se sabia falhar no casamento exato — não é evidência de que o método generaliza.
+
+**Parte 2 — classificador** ([protocolo](document/fase-02/protocolo-classificador.md) · [notebook](notebooks/fase-02/fase-02-tfidf-classificador-risco.ipynb)). Baseline (chuta sempre a mesma classe): acurácia **0,50**. TF-IDF + regressão logística na validação cruzada 5×10: acurácia **0,812 ± 0,084** e **recall de alto risco 0,828 ± 0,143** (métrica principal, pela assimetria de custo da Fase 1). O split fixo 75/25 deu 0,85 — caiu do lado bom da variação.
+
+**Distorções encontradas** (detalhe na seção 9 do notebook):
+- **"mas" é o critério de rótulo vazando para a sintaxe:** aparece em 0 frases de alto risco e 10 de baixo; o modelo aprendeu que quem relativiza o sintoma está bem, e o falso negativo perigoso é um paciente que minimizou ("…mas não dói nada").
+- **"eu" é efeito Clever Hans:** 7 frases de alto risco, 0 de baixo; um acerto do desafio veio desse pronome, não do sinal clínico.
+- **Erro concentrado em AVC:** 4 dos 7 falsos negativos são de AVC; recall 0,783 em sinais de AVC contra 0,864 em sinais de infarto (sem poder estatístico com n de 22 e 23).
+- **Teste contrafactual de gênero:** os 3 pares tiveram predição idêntica, mas em cada par a palavra de gênero de um dos lados está fora do vocabulário — a aprovação é fraca ([critério, seção 6](document/fase-02/criterio-rotulo-risco.md)).
+
+### 🔧 Como executar a Entrega 2
+
+Pré-requisito: Python 3.12.
+
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+
+# 1. Verificadores (mapa, frases, protocolos e dataset — congelados por SHA-256)
+python scripts/fase-02/01_verifica_mapa_e_frases.py
+python scripts/fase-02/06_verifica_dataset_risco.py
+
+# 2. Extrator nas 10 frases (regenera document/fase-02/resultado-extrator.md)
+python scripts/fase-02/02_extrai_sintomas_sugere_diagnostico.py
+#    ou numa frase avulsa (só imprime):
+python scripts/fase-02/02_extrai_sintomas_sugere_diagnostico.py --frase "Estou com dor no peito e suando frio"
+
+# 3. Testes do extrator (U1–U14 pré-registrados + U15 adicionado depois)
+python scripts/fase-02/03_testa_extrator.py
+python scripts/fase-02/04_testa_extrator_adendo.py
+
+# 4. Notebook do classificador, executado de ponta a ponta
+jupyter nbconvert --to notebook --execute notebooks/fase-02/fase-02-tfidf-classificador-risco.ipynb --output /tmp/notebook-executado.ipynb
+```
+
+Os recursos da NLTK (stemmer RSLP e stopwords) são baixados pelo extrator para `.cache/nltk_data` e conferidos por SHA-256. **No Google Colab:** abra o notebook pelo badge acima — ele detecta o Colab e lê os CSVs direto do GitHub (branch `main`).
+
+
 ## 🗃 Histórico de lançamentos
 
 * 0.5.0 - XX/XX/2024
@@ -214,8 +275,8 @@ efeito colateral. Detalhe de cada etapa em `document/fase-01/`.
     * 
 * 0.3.0 - XX/XX/2024
     * 
-* 0.2.0 - XX/XX/2024
-    * 
+* 0.2.0 - 23/09/2026
+    * Fase 2 — Diagnóstico Automatizado: 10 frases de teste e mapa de conhecimento (3 doenças, 53 linhas, fontes do Ministério da Saúde), extrator de sintomas com protocolo pré-registrado, dataset rotulado de 80 frases com conjunto-desafio, e notebook TF-IDF + regressão logística com hipóteses pré-registradas e análise das distorções.
 * 0.1.0 - 27/08/2026
     * Fase 1 — Batimentos de Dados: dataset numérico (UCI Heart Disease, 303 pacientes), corpus textual (2 textos, técnico + leigo) e conjunto de imagens de ECG (120 selecionadas de 928, deduplicadas) coletados, tratados e documentados, com governança de dados e viés registrados.
 

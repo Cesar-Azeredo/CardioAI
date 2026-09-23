@@ -1,0 +1,81 @@
+frase,situacao,sinal_de_alerta,tipo_frase,marcador_genero
+O peito dói há uns vinte minutos e a dor vai para o braço esquerdo; fiquei assustada e parei tudo no trabalho.,alto risco,I1,infarto-leigo,feminino
+"Começou uma sensação de peso no peito enquanto eu lavava o carro, e agora estou toda encharcada de suor frio.",alto risco,I2;I3,infarto-literal,feminino
+Do nada veio falta de ar e uma palidez que minha filha notou na hora do jantar.,alto risco,I5;I4,infarto-literal,neutro
+Sinto um aperto sobre o tórax que não passa desde cedo e já tive sensação de desmaio duas vezes.,alto risco,I2;I6,infarto-literal,neutro
+Tenho um desconforto no peito que irradia para as costas; começou no meio da reunião e não melhora sentado.,alto risco,I1,infarto-literal,neutro
+"Parece que tem um peso enorme em cima do meu peito, fiquei gelado e molhado de suor.",alto risco,I2;I3,infarto-leigo,masculino
+Tô sem conseguir puxar o ar direito e o meio do peito dói desde que acordei.,alto risco,I5;I1,infarto-leigo,neutro
+"Meu braço esquerdo está dolorido junto com o peito, e eu tive que ficar sentada no chão do mercado.",alto risco,I1,infarto-leigo,feminino
+"Suei frio de repente, fiquei branco e achei que ia apagar ali mesmo no ponto de ônibus.",alto risco,I3;I4;I6,infarto-leigo,masculino
+Uma queimação forte no peito subiu até o queixo e o suor não para de escorrer.,alto risco,I1;I3,infarto-leigo,neutro
+Estou ofegante sem ter feito esforço nenhum e com um aperto esquisito no peito há meia hora.,alto risco,I5;I2,infarto-leigo,neutro
+"Tenho diabetes e hoje, no meio da tarde, bateu um mal-estar súbito com suor gelado; larguei o serviço pela metade.",alto risco,I7;I3,infarto-literal,neutro
+O peito começou a doer quando subi a ladeira de casa e continuou mesmo depois que fiquei parado descansando.,alto risco,I1,infarto-leigo,masculino
+"O peito dói, o ar não vem e fui obrigada a largar a bicicleta no meio da rua.",alto risco,I1;I5,infarto-leigo,feminino
+"Acordei assustada de madrugada com o peito dolorido e suando frio, e não consegui mais voltar a dormir.",alto risco,I1;I3,infarto-leigo,feminino
+De repente fiquei com a fala enrolada e não entendo direito o que meu marido me pergunta.,alto risco,A2,avc-literal,neutro
+Estou com fraqueza no lado direito do corpo desde o almoço e não consigo levantar o braço.,alto risco,A6,avc-literal,neutro
+Minha visão escureceu em um olho de repente enquanto eu lia o jornal no sofá.,alto risco,A3,avc-literal,neutro
+"Deu uma dor de cabeça súbita, a pior que já senti, sem motivo nenhum, e vomitei em seguida.",alto risco,A4,avc-literal,neutro
+Perdi o equilíbrio do nada e comecei a andar torto pelo corredor de casa.,alto risco,A5,avc-literal,neutro
+"Hoje cedo fiquei confusa, não sabia que dia era nem onde tinha deixado as chaves.",alto risco,A1,avc-leigo,feminino
+"Faz uns quinze minutos que um formigamento tomou só um lado do meu corpo, do rosto até a perna esquerda.",alto risco,A6,avc-literal,neutro
+"Metade do meu rosto ficou dormente de uma hora para outra, só do lado esquerdo.",alto risco,A6,avc-leigo,neutro
+"Quero responder e não consigo, sai uma coisa sem sentido no lugar do que eu penso.",alto risco,A2,avc-leigo,neutro
+"Minha perna direita ficou pesada e arrastando, e quase caí na escada da igreja.",alto risco,A6;A5,avc-leigo,neutro
+"Tudo começou a rodar de repente e eu não consigo ficar em pé sozinho, sem me apoiar na parede.",alto risco,A5,avc-leigo,masculino
+"Estou enxergando tudo dobrado desde que acordei, e isso nunca tinha acontecido comigo.",alto risco,A3,avc-leigo,neutro
+"Meu braço esquerdo não obedece, a xícara escorregou da mão e não consegui pegar de volta.",alto risco,A6,avc-leigo,neutro
+Meu filho disse que eu estava falando coisas sem sentido e eu nem percebi.,alto risco,A1;A2,avc-leigo,neutro
+Deu uma pontada fortíssima na cabeça do nada e a vista ficou embaralhada.,alto risco,A4;A3,avc-leigo,neutro
+Sinto a mão direita formigando e fraca desde a hora que saí do banho.,alto risco,A6,avc-leigo,neutro
+"Fiquei tonto de repente e a fala saiu mole, quase não consegui pedir ajuda ao vizinho.",alto risco,A5;A2,avc-leigo,masculino
+O peito dói e agora o braço direito também ficou fraco e formigando.,alto risco,I1;A6,combinado,neutro
+"Senti falta de ar, depois a visão ficou turva e a perna direita perdeu a força.",alto risco,I5;A3;A6,combinado,neutro
+"Suor frio, tontura e uma confusão na cabeça que começou quando eu estava cozinhando.",alto risco,I3;A5;A1,combinado,neutro
+"Estou toda pálida, sem ar e com a sensação de que vou desmaiar a qualquer momento.",alto risco,I4;I5;I6,infarto-leigo,feminino
+Tive uma dor de cabeça repentina muito forte e agora estou com dificuldade para falar.,alto risco,A4;A2,avc-leigo,neutro
+Um aperto no peito e o lado esquerdo do corpo formigando me acordaram de madrugada.,alto risco,I2;A6,combinado,neutro
+"Depois do almoço fiquei desorientado, com a vista borrada e a camisa toda molhada de suor frio.",alto risco,A1;A3;I3,combinado,masculino
+"Estou preocupado com um desconforto no peito, enjoo e o braço esquerdo pesado há quase uma hora.",alto risco,I1,infarto-leigo,masculino
+"Carreguei caixas na mudança ontem e hoje acordei toda quebrada, com as costas doloridas, mas melhora quando deito.",baixo risco,,benigno-corpo,feminino
+"Meu braço está dolorido desde o treino de ontem na academia, principalmente quando levanto a mochila.",baixo risco,,benigno-corpo,neutro
+"Voltei moída da caminhada longa de domingo, nada que um banho quente não resolva.",baixo risco,,benigno-corpo,feminino
+Dormi de mau jeito e acordei com o pescoço duro; virar para o lado ainda incomoda.,baixo risco,,benigno-corpo,neutro
+Estou com o ombro direito dolorido de tanto pintar a parede da sala no fim de semana.,baixo risco,,benigno-corpo,neutro
+Meu rosto está ardendo e vermelho porque fiquei tempo demais no sol da praia.,baixo risco,,benigno-corpo,neutro
+Senti o tornozelo esquerdo virar no futebol e o pé inchou um pouco; coloquei gelo e já desinchou.,baixo risco,,benigno-corpo,neutro
+"Cortei a mão descascando batata, sangrou um pouco mas já estancou com o curativo.",baixo risco,,benigno-corpo,neutro
+Levei uma picada de mosquito na perna que está coçando muito desde a noite passada.,baixo risco,,benigno-corpo,neutro
+Meu joelho esquerdo estala e dói um pouco quando subo escada depois da corrida de sábado.,baixo risco,,benigno-corpo,neutro
+"Voltei do jogo meio travado, com cãibra na panturrilha, mas a perna soltou depois de alongar.",baixo risco,,benigno-corpo,masculino
+Bati o cotovelo na quina da mesa e ficou uma mancha roxa no braço.,baixo risco,,benigno-corpo,neutro
+"Não sinto dor no peito, o problema é o nariz entupido que não me deixa dormir.",baixo risco,,benigno-negacao,neutro
+"Sem tontura e sem fraqueza, só estou com a garganta arranhando quando engulo.",baixo risco,,benigno-negacao,neutro
+Não tive febre nem aperto no peito; é só uma tosse seca que aparece à noite.,baixo risco,,benigno-negacao,neutro
+Não tenho formigamento nem fraqueza; o que me incomoda é uma afta na língua desde terça.,baixo risco,,benigno-negacao,neutro
+"Não estou com suor frio nem palidez, só espirrando muito por causa da poeira da reforma.",baixo risco,,benigno-negacao,neutro
+"Estou toda congestionada, espirrando e com coriza desde que o tempo esfriou, mas consigo trabalhar normalmente.",baixo risco,,benigno-outro,feminino
+Minha garganta ficou meio irritada depois que gritei no show de sábado; gargarejo com água morna tem ajudado.,baixo risco,,benigno-outro,neutro
+"Senti uma dor de dente do lado de baixo há dois dias, e ela piora quando tomo algo gelado.",baixo risco,,benigno-outro,neutro
+Apareceu uma espinha inflamada no queixo e está doendo quando encosto.,baixo risco,,benigno-corpo,neutro
+Passei a noite em claro com o barulho da obra e hoje estou sonolento a toda hora.,baixo risco,,benigno-outro,masculino
+"Fiquei resfriado depois da chuva de ontem, nariz entupido e alguns espirros.",baixo risco,,benigno-outro,masculino
+Tenho uma unha encravada no dedão que inflamou e dói na hora de calçar o tênis.,baixo risco,,benigno-outro,neutro
+Minha pele está ressecada e coçando nos braços desde que começou o inverno.,baixo risco,,benigno-corpo,neutro
+"Estou com uma bolha no calcanhar esquerdo por causa do sapato novo, então troquei de sapato para ir trabalhar.",baixo risco,,benigno-outro,neutro
+"Queimei o dedo tirando a forma do forno, ficou vermelho e ardendo por um tempo.",baixo risco,,benigno-outro,neutro
+Estou com coceira nas costas desde que troquei o sabão em pó.,baixo risco,,benigno-corpo,neutro
+"Fiquei cansado depois de horas de faxina, mas foi só deitar que passou.",baixo risco,,benigno-outro,masculino
+"Estou empolgada aprendendo violão, mas a mão ganhou um calo que incomoda.",baixo risco,,benigno-corpo,feminino
+"Esfolei o joelho quando caí do patinete com meu filho; fiquei envergonhado, mas só arranhou a pele.",baixo risco,,benigno-corpo,masculino
+"Estou com herpes no lábio de novo, apareceu depois de uma semana em que fiquei muito estressada no serviço.",baixo risco,,benigno-outro,feminino
+"Estou com uma tosse leve com catarro há alguns dias, mas estou animado, sem febre e comendo bem.",baixo risco,,benigno-outro,masculino
+"Machuquei as costas puxando o balde de água, dói quando me curvo mas não irradia para lugar nenhum.",baixo risco,,benigno-corpo,neutro
+Saiu uma brotoeja no pescoço por causa do calor desses dias.,baixo risco,,benigno-outro,neutro
+Senti o punho reclamar depois de uma hora digitando o relatório e agora está doendo para escrever.,baixo risco,,benigno-outro,neutro
+"Fiquei com a perna dolorida de tanto ficar em pé na feira, mas melhora quando descanso sentada com os pés para cima.",baixo risco,,benigno-corpo,feminino
+"Não sinto fraqueza nem formigamento, só uma dor no calcanhar esquerdo quando piso de manhã.",baixo risco,,benigno-negacao,neutro
+Comi uma fruta que me deu alergia e surgiram umas manchinhas que coçam no braço.,baixo risco,,benigno-corpo,neutro
+"Senti uma farpa entrar no dedo no meio da jardinagem e fiquei chateado, o lugar está sensível ao toque.",baixo risco,,benigno-outro,masculino

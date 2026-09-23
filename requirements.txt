@@ -19,3 +19,29 @@ jupyter==1.1.1
 # fixado aqui como dependencia direta porque o script importa bs4 diretamente.
 requests==2.34.2
 beautifulsoup4==4.15.0
+
+# Fase 2 — TF-IDF e classificador de risco (notebooks/fase-02/).
+# scikit-learn fixado na versao do runtime padrao do Google Colab, conferida no
+# pip-freeze oficial (github.com/googlecolab/backend-info, commit de
+# 2026-09-21): scikit-learn==1.6.1, scipy==1.16.3. Wheel cp312 confirmado.
+# scipy fixado tambem, embora seja transitivo: sem pin o pip resolve scipy
+# 1.18.x, que o sklearn 1.6.1 nao acompanha — LogisticRegression passa a
+# emitir "OptimizeWarning: Unknown solver options: iprint" em todo fit.
+scikit-learn==1.6.1
+scipy==1.16.3
+#
+# numpy segue em 2.0.2, embora o Colab ja esteja em 2.1.3 (mesmo pip-freeze).
+# Regressao de 2026-09-23: scripts 01-05 da Fase 1 rodados em venv limpa com
+# numpy 2.1.3 geram CSV, .txt, PROVENIENCIA, manifest, as 12 amostras e as 120
+# selecionadas byte-identicos aos versionados — exceto o .xlsx, cujo unico
+# arquivo interno diferente e docProps/core.xml (carimbo de data/hora que o
+# openpyxl grava). O controle com 2.0.2 diverge do mesmo jeito: nao e efeito do
+# numpy, e a regressao de conteudo passou. Mesmo assim nao sobe: no Colab o
+# notebook usa o numpy do proprio Colab, entao a subida nao traz beneficio.
+# Detalhe em document/fase-02/governanca-e-vies.md.
+
+# Fase 2 — extrator de sintomas (scripts/fase-02/02_*.py): stemmer RSLP e lista
+# de stopwords do portugues. nltk fixado na versao do pip-freeze oficial do
+# Colab (2026-09-21). Os recursos rslp e stopwords sao baixados pelo proprio
+# script para .cache/nltk_data e conferidos por SHA-256 (protocolo 2.5).
+nltk==3.9.1
