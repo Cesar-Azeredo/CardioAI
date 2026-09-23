@@ -28,7 +28,7 @@ Consequências práticas, que valem como regra:
 
 | Campo | Valor |
 |---|---|
-| **Fase em andamento** | **Fase 2 — Diagnóstico Automatizado** (branch `fase-02/nlp-triagem`; etapa de fundação feita, entregáveis em aberto — ver 5bis.6) |
+| **Fase em andamento** | **Fase 2 — Diagnóstico Automatizado** — todos os entregáveis prontos e integrados na `main` (merge `--no-ff` da branch `fase-02/nlp-triagem`, 2026-09-23); **falta só o vídeo** (ver 5bis.6) |
 | Fases concluídas | **Fase 1 — Batimentos de Dados** (dado coletado, tratado e documentado nas três partes; links públicos publicados no Google Drive) |
 | Ambiente | VS Code local, repositório já criado a partir do template FIAP e conectado ao GitHub |
 | Idioma dos entregáveis | **Português do Brasil** |
@@ -464,19 +464,21 @@ Só considerar a fase pronta quando **todos** os itens estiverem verdadeiros.
 - [x] `scikit-learn` registrado em `requirements.txt` e instalação testada de verdade em venv limpa.
 - [x] Fontes gov.br de infarto e AVC coletadas por script reprodutível, com licença lida da página, contagem de palavras por script e integridade (ND) verificada.
 - [x] Fontes BVS retiradas do escopo por decisão registrada (HTTP 503 em todo o domínio, 2026-09-23).
-- [ ] `.csv` do mapa de conhecimento em `document/datasets/fase-02/`, cobrindo hipertensão, infarto e AVC, com **fonte e trecho literal em cada linha**.
-- [ ] `.txt` com **10 frases** de paciente, redação própria, sem identificador pessoal, com ficha de redação.
-- [ ] Código Python de extração rodando de ponta a ponta em venv limpa: lê as frases, extrai sintomas, sugere diagnóstico, com aviso de uso exclusivamente acadêmico.
-- [ ] `.csv` de frases rotuladas alto/baixo risco — **80 frases, 40/40** —, com critério de rotulagem escrito e ancorado em fonte; nº de linhas contado por script.
-- [ ] `.ipynb` com TF-IDF, classificador e avaliação — matriz de confusão, recall e F1 por classe, **recall de "alto risco" em destaque**, explicação de por que acurácia global não basta; outputs limpos; roda no Colab.
-- [ ] `document/datasets/fase-02/README.md` com a ficha de cada arquivo.
-- [ ] `document/fase-02/` com: lacuna IC/angina, exceção à regra 4, compromisso 1 transferido, compromisso 2 adiado, vieses novos da Fase 2 (circularidade autor/rótulo, n pequeno, negação, variantes lexicais).
-- [ ] `document/datasets/dicionario-de-dados.md` atualizado (`alvo_binario` → Fase 6).
-- [ ] `README.md` com bloco "Entrega 2" em paralelo e linha `0.2.0`, sem alterar o bloco da Entrega 1.
-- [ ] Repositório **público**, verificado em janela anônima.
+- [x] `.csv` do mapa de conhecimento em `document/datasets/fase-02/`, cobrindo hipertensão, infarto e AVC, com **fonte e trecho literal em cada linha** (53 linhas, 26 conceitos, congelado).
+- [x] `.txt` com **10 frases** de paciente, redação própria, sem identificador pessoal, com ficha de redação (congelado).
+- [x] Código Python de extração rodando de ponta a ponta em venv limpa: lê as frases, extrai sintomas, sugere diagnóstico, com aviso de uso exclusivamente acadêmico (U1–U14 + U15 passando).
+- [x] `.csv` de frases rotuladas alto/baixo risco — **80 frases, 40/40** —, com critério de rotulagem escrito e ancorado em fonte; nº de linhas contado por script (congelado; desafio de 18 frases fora do treino).
+- [x] `.ipynb` com TF-IDF, classificador e avaliação — matriz de confusão, recall e F1 por classe, **recall de "alto risco" em destaque**, explicação de por que acurácia global não basta; commitado **executado** (notebook entregável — seção 7). Colab: leitura dos CSVs pela URL raw da `main` conferida por HTTP; **execução no Colab não testada**.
+- [x] `document/datasets/fase-02/README.md` com a ficha de cada arquivo.
+- [x] `document/fase-02/` com: lacuna IC/angina, exceção à regra 4, compromisso 1 transferido, compromisso 2 adiado (`governanca-e-vies.md`), vieses novos da Fase 2 — circularidade autor/rótulo (`protocolo-classificador.md`, `autoavaliacao.md`), n pequeno (`autoavaliacao.md`), negação e variantes lexicais (`gabarito-frases.md`, `adendo-pos-execucao.md`), atalhos "mas"/"eu" (notebook, seção 9).
+- [x] `document/datasets/dicionario-de-dados.md` atualizado (`alvo_binario` → Fase 6).
+- [x] `README.md` com bloco "Entrega 2" em paralelo e linha `0.2.0`, sem alterar o bloco da Entrega 1.
+- [x] Repositório **público** — verificado por HTTP sem autenticação (200) em 2026-09-23; a conferência em janela anônima fica para o humano.
 - [ ] Vídeo de até 4 min no YouTube (não listado), link no `README.md` — conferido em janela anônima.
 - [ ] Nenhum `TODO(humano)` de link pendente.
-- [ ] Autoavaliação contra a rubrica da seção 5bis.2 (`document/fase-02/autoavaliacao.md`).
+
+**16 de 18 itens verdadeiros.** Pendentes, os dois do vídeo: gravar e publicar, e colar o link — o único `TODO(humano)` de link aberto.
+- [x] Autoavaliação contra a rubrica da seção 5bis.2 (`document/fase-02/autoavaliacao.md`).
 
 ---
 
