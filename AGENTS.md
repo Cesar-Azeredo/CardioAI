@@ -29,6 +29,7 @@ Consequências práticas, que valem como regra:
 | Campo | Valor |
 |---|---|
 | **Fase em andamento** | **Fase 2 — Diagnóstico Automatizado** — todos os entregáveis prontos e integrados na `main` (merge `--no-ff` da branch `fase-02/nlp-triagem`, 2026-09-23); **falta só o vídeo** (ver 5bis.6) |
+| Entrega extra em andamento | **Ir Além 2 — MLP em Keras sobre ECG** (branch `ir-alem-2/mlp-ecg`) — notebook executado, README e exemplos prontos, integrado na `main` (merge `--no-ff` da branch `ir-alem-2/mlp-ecg`, 2026-09-23); **falta o vídeo e a confirmação do tutor** (ver 5ter.6) |
 | Fases concluídas | **Fase 1 — Batimentos de Dados** (dado coletado, tratado e documentado nas três partes; links públicos publicados no Google Drive) |
 | Ambiente | VS Code local, repositório já criado a partir do template FIAP e conectado ao GitHub |
 | Idioma dos entregáveis | **Português do Brasil** |
@@ -39,7 +40,7 @@ Consequências práticas, que valem como regra:
 
 ## 3. Estrutura de diretórios
 
-Esta árvore parte do **template FIAP** já existente no repositório (não substitui nada dele). `[F1]` = criado/preenchido na Fase 1; `[F2]` = criado na Fase 2; `[futuro]` = reservado para próximas fases; `[template]` = já existia antes da Fase 1 e permanece como está.
+Esta árvore parte do **template FIAP** já existente no repositório (não substitui nada dele). `[F1]` = criado/preenchido na Fase 1; `[F2]` = criado na Fase 2; `[IA2]` = criado no Ir Além 2 (entrega extra da Fase 2, seção 5ter); `[futuro]` = reservado para próximas fases; `[template]` = já existia antes da Fase 1 e permanece como está.
 
 ```
 CardioIA/
@@ -47,6 +48,7 @@ CardioIA/
 ├── CLAUDE.md                          # só `@AGENTS.md` (importa este arquivo) [F1]
 ├── README.md                          # ENTREGÁVEL AVALIADO — template FIAP  [F1]
 ├── requirements.txt                                                          [F1]
+├── requirements-ir-alem-2.txt         # -r requirements.txt + TF/Keras       [IA2]
 ├── .gitignore                                                                [F1]
 │
 ├── assets/
@@ -56,6 +58,7 @@ CardioIA/
 │   │   └── fase-02/                   # fontes do mapa (gov.br) + frases     [F2]
 │   └── imagens/
 │       ├── amostras/                  # ~12 imagens leves p/ ilustrar README [F1]
+│       ├── ir-alem-2/                 # 4 pares antes/depois do pré-proc.    [IA2]
 │       └── LEIA-ME.md                 # explica que o conjunto está no Drive [F1]
 │
 ├── config/                            # parâmetros de sensores (ESP32) e modelos
@@ -75,6 +78,7 @@ CardioIA/
 │   │   ├── dados-visuais.md                                                   [F1]
 │   │   └── governanca-e-vies.md                                               [F1]
 │   ├── fase-02/                       # governança, decisões, autoavaliação   [F2]
+│   │   └── ir-alem-2/                 # protocolo da MLP, levantamento       [IA2]
 │   ├── fase-03/ ... fase-07/                                            [futuro]
 │   └── other/
 │       └── readme.md                                                    [template]
@@ -84,12 +88,14 @@ CardioIA/
 │   │                                  # foi feita por script, não notebook:
 │   │                                  # scripts/fase-01/02_perfila_...py     [F1]
 │   ├── fase-02/                       # TF-IDF + classificador de risco      [F2]
+│   │   └── ir-alem-2/                 # MLP em Keras sobre ECG               [IA2]
 │   └── fase-03/ ...                                                     [futuro]
 │
 ├── scripts/
 │   ├── readme.md                                                        [template]
 │   ├── fase-01/                       # coleta, tratamento, validação        [F1]
 │   └── fase-02/                       # coleta das fontes, extrator          [F2]
+│       └── ir-alem-2/                 # download, dedup e auditoria do ECG   [IA2]
 │
 └── src/
     ├── readme.md                                                        [template]
@@ -265,8 +271,9 @@ com um mapa de conhecimento e sugere diagnóstico e nível de risco.
 5. `.ipynb` com **TF-IDF, classificador e avaliação**.
 6. **`README.md` atualizado** e **vídeo de até 4 min no YouTube (não listado)**, com link no GitHub.
 
-Itens "Ir Além": **não decididos**. Não entram no plano nem no DoD até
-decisão do humano. Se entrarem, o lugar é `notebooks/fase-02/ir-alem-*.ipynb`
+Itens "Ir Além": **não entram no DoD da Fase 2.** O **Ir Além 2** foi
+decidido em 2026-09-23 e tem seção própria (5ter); os demais seguem não
+decididos. Se entrarem, o lugar é `notebooks/fase-02/ir-alem-*.ipynb`
 e `document/fase-02/ir-alem.md`.
 
 ### 5bis.2 Rubrica de avaliação (10 pontos) — otimizar contra isto
@@ -453,7 +460,7 @@ não é criado.
 
 ### 5bis.5 Decisões ainda em aberto
 
-- Itens "Ir Além".
+- Itens "Ir Além" além do Ir Além 2 (este está na seção 5ter).
 
 ### 5bis.6 Definition of Done da Fase 2
 
@@ -479,6 +486,184 @@ Só considerar a fase pronta quando **todos** os itens estiverem verdadeiros.
 
 **16 de 18 itens verdadeiros.** Pendentes, os dois do vídeo: gravar e publicar, e colar o link — o único `TODO(humano)` de link aberto.
 - [x] Autoavaliação contra a rubrica da seção 5bis.2 (`document/fase-02/autoavaliacao.md`).
+
+---
+
+## 5ter. Ir Além 2 — Diagnóstico visual com rede neural (MLP em Keras)
+
+**Entrega extra, fora da atividade principal da Fase 2** (que está concluída
+e não é tocada). Vive neste mesmo repositório, na branch `ir-alem-2/mlp-ecg`.
+
+### 5ter.1 Enunciado — resumo
+
+> Resumo informado pelo humano em 2026-09-23; o texto literal não está
+> registrado aqui. Se for colado depois, prevalece sobre este resumo.
+
+Dataset público de imagens de ECG com **classificação binária (normal vs.
+anormal)**; pré-processar (**redimensionar, tons de cinza**); **MLP em
+Keras**; treinar, testar, avaliar acurácia.
+
+**Entregáveis:** notebook comentado e funcional; exemplos de imagens; README
+explicativo; vídeo de até 4 min no YouTube (não listado).
+
+**Critérios de avaliação:** pré-processamento correto das imagens; MLP
+funcional; treino e avaliação com resultados; organização do notebook.
+
+### 5ter.2 Decisão de dataset (2026-09-23)
+
+**Usamos as imagens de ECG da Fase 1** (Mendeley `gwbz3fsgp8` v2, DOI
+`10.17632/gwbz3fsgp8.2`, CC BY 4.0), **não** o `shayanfazeli/heartbeat` do
+Kaggle recomendado pelo enunciado. Motivo, a registrar no README: o dataset
+do Kaggle é de **sinais segmentados em CSV**, não de imagens — não há o que
+redimensionar nem converter para tons de cinza. As imagens da Fase 1 cumprem
+o texto do enunciado e reaproveitam o manifest e a auditoria de duplicatas.
+
+> ⚠️ **PENDÊNCIA A VERIFICAR:** Confirmar com o tutor (André Godoy) se o uso
+> das imagens do Mendeley no lugar do dataset recomendado do Kaggle é
+> aceito. Argumento: o Kaggle `shayanfazeli/heartbeat` é de sinais em CSV e
+> não permite o "pré-processamento correto das imagens" exigido nos
+> critérios. **Plano B**, se o tutor exigir o Kaggle: converter cada sinal do
+> CSV em imagem desenhando o traçado, e então aplicar o pré-processamento —
+> cumpre as duas exigências ao pé da letra, mas é artificial, porque desenha
+> um sinal só para a MLP achatá-lo de novo.
+
+**Binário:** normal = `Normal` (142); anormal = `MI` + `PMI` + `HB`
+(30 + 86 + 233 = 349). 28,9% / 71,1%.
+
+### 5ter.3 Etapa 1 — levantamento (2026-09-23, sem treino)
+
+Scripts em `scripts/fase-02/ir-alem-2/`; dado **fora do repositório**, em
+`~/.cache/cardioia/mendeley-gwbz3fsgp8-v2/` (mesmo caminho no Colab:
+`/root/.cache/...`).
+
+- **01 — download** pela API pública
+  (`https://data.mendeley.com/public-api/zip/gwbz3fsgp8/download/2` → 302
+  para S3 pré-assinado). Só biblioteca padrão, para o Colab chamar antes de
+  qualquer `pip`. Idempotente. Confere **contagem por pasta** (928 `.jpg`),
+  não hash do zip: o Mendeley gera o zip no servidor e não publica checksum.
+  Zip de 2026-09-23: 193,9 MB, SHA-256
+  `016ab954e9b1392dcea1e2b5638752593ec30feda07281a00b5b8f2e13618c50`
+  (registro, não critério).
+- **02 — deduplicação por MD5**, mesmo método da Fase 1: **491 únicas
+  (MI 30, PMI 86, HB 233, Normal 142)**, idêntico à Fase 1; **0 colisões
+  de MD5 entre categorias** (checagem nova — no binário, a mesma imagem com
+  dois rótulos); 120/120 MD5 do manifest da Fase 1 presentes. **A
+  deduplicação é requisito, não cuidado:** 47% dos arquivos são cópia byte
+  a byte (87% em MI); split sobre arquivos põe a mesma imagem no treino e
+  no teste, e o teste passa a medir memorização. Gera
+  `indice-unicos.csv` (fora do repo), entrada do split.
+- **03 — auditoria do texto impresso** (as 491, não amostra):
+  - Layout **fixo**: 491/491 em 2213×1572 RGB; moldura vermelha da grade em
+    y 283–1517, x 68–2176 (52 imagens em 2175 — lotes de digitalização
+    consecutivos, irrelevante). Texto do cabeçalho em y 31–275 (ID do
+    exame, sexo, campos vazios); rodapé em y 1538–1552 (filtro, ♥ **FC**,
+    aviso **"Lead Off"** em 35 imagens, data/hora — dois formatos de data,
+    lotes de 2019 e 2020, misturados entre as classes).
+  - **FC impressa lida por casamento de glifos** (fonte fixa, pior casamento
+    1 bit em 165): **nenhuma Normal passa de 90 bpm**; HB mediana 105, 85%
+    acima de 90. **"FC impressa > 90" identifica 223 das 349 anormais (64%)
+    com precisão de 100%** — o atalho é real e medido, não hipotético.
+  - Sexo impresso (≈90% "Male") e "Lead Off" **não** separam as classes
+    (F: 5–11%; Lead Off: 0–10% por categoria).
+  - **Recorte proposto: interior da moldura, `(68, 283, 2177, 1518)` →
+    2109×1235.** Todo texto variável fica fora. Custo: 9 imagens têm a
+    ponta de um pico passando alguns pixels da moldura, cortada.
+  - **Template do aparelho dentro do recorte:** pixels escuros em ≥95% das
+    491 imagens (rótulos das derivações, pulso de calibração, barras
+    separadoras) = **31% da tinta média de cada imagem**. O recorte tira o
+    texto, mas não o template — é o risco de *shortcut learning* da Fase 1
+    (um aparelho, um centro, um país) e não se resolve com este dado.
+  - A FC continua no traçado (intervalo RR). Isso é sinal clínico legítimo,
+    não atalho — mas implica que a separação HB × Normal pode ser "fácil" por
+    ritmo, e o recall por subcategoria precisa ser reportado.
+- **Dependência testada em venv limpa (Python 3.12, macOS arm64):**
+  `tensorflow==2.21.0`, `keras==3.13.2`, `protobuf==6.33.6` — versões do
+  pip-freeze oficial do Colab (commit `ac5f3b6`, 2026-09-23), registradas em
+  `requirements-ir-alem-2.txt`, não no `requirements.txt`. Wheel cp312
+  `macosx_12_0_arm64` existe. Instala junto do `requirements.txt` inteiro
+  **mantendo numpy 2.0.2**, `pip check` limpo; import e `predict` de MLP em
+  CPU testados.
+
+### 5ter.4 Etapa 2A — verificações antes do protocolo (2026-09-23)
+
+Registro completo em `document/fase-02/ir-alem-2/levantamento.md`.
+
+- **Borda x = 2175** (52 imagens): nas 4 categorias (MI 7%, PMI 6%, HB 10%,
+  Normal 15%), em números de arquivo consecutivos — lote de digitalização.
+  Só a borda se desloca; o template não. **Recorte recuado 4 px em todos os
+  lados: `(72, 287, 2173, 1514)` → 2101×1227.**
+- **Leitura por glifo validada à mão:** 20 aleatórias (semente 42) + 23
+  dirigidas (as 13 normais com FC ≥ 85, 5 "Female", 5 "Lead Off"):
+  **86 campos, 0 erro** (script 04).
+- **Manifest** `document/datasets/processed/manifest-ir-alem-2.csv` (491
+  linhas, em `processed/` porque é derivado por script de base externa, como
+  o `manifest-imagens.csv` da Fase 1): FC e sexo impressos, "Lead Off",
+  borda. **Sem ID do exame e sem data/hora (decisão LGPD).**
+- **Sexo impresso: 91% masculino** (447/491), mais que a Cleveland (68%);
+  29 anormais femininas no total.
+
+### 5ter.5 Decisões aprovadas pelo humano para a Etapa 2 (2026-09-23)
+
+Recorte, resolução (**128×75 principal, 192×112 como comparação única
+pré-declarada**) e `class_weight` aprovados. Protocolo pré-registrado e
+commitado sozinho: `document/fase-02/ir-alem-2/protocolo-mlp.md` (H1–H5;
+split fixo + CV 5×3; baselines majoritário e "FC impressa > 90"; controle sem
+recorte; avaliação por sexo como metadado). As propostas da Etapa 1, como
+foram apresentadas:
+
+- **Pré-processamento:** recorte → tons de cinza (`L`) → redimensionar com
+  `BOX` (média de área; não some com a linha de ~3 px) mantendo a razão
+  1,71 → **inverter** (`1 − x/255`: traçado ≈ 1, fundo ≈ 0) → [0, 1].
+  Parâmetros da 1ª camada `Dense(128)` (conferidos por `count_params`):
+  64×37 → 303 mil; **128×75 → 1,23 mi**; **192×112 → 2,75 mi**;
+  256×150 → 4,92 mi; 128×128 (distorce) → 2,10 mi. Treino ≈ 333 imagens:
+  mesmo em 128×75 são ~3.700 parâmetros por imagem de treino → dropout e
+  early stopping obrigatórios.
+- **Split:** sobre as 491 únicas, ordenadas por MD5, estratificado pela
+  **categoria original** (para as 30 MI não caírem todas de um lado),
+  semente 42: teste 20% (99: 70 anormal / 29 normal; MI 6, PMI 17, HB 47),
+  validação 15% do resto (59) para early stopping, treino 333. Zero MD5 em
+  comum entre partições (verificado).
+- **Desbalanceamento:** `class_weight` balanceado (normal 1,73; anormal
+  0,70), **não oversampling** — oversampling duplica imagens, exatamente o
+  que a deduplicação removeu.
+- **Leitura dos resultados:** baseline de classe majoritária = **71,1% de
+  acurácia** (sempre "anormal"): piso, não conquista. Reportar acurácia
+  (exigida), acurácia balanceada, matriz de confusão, recall por classe e
+  **recall de "anormal" por subcategoria (MI/PMI/HB)**. Teste com n = 99:
+  IC 95% ≈ ±9 p.p. na acurácia; MI tem 6 imagens no teste.
+
+### 5ter.6 Etapa 2C — notebook executado (2026-09-23)
+
+`notebooks/fase-02/ir-alem-2/ir-alem-2-mlp-ecg.ipynb`, venv nova de
+`requirements-ir-alem-2.txt`, kernel limpo. **Duas execuções registradas**
+(protocolo, seção 3): a 1 rodou com `MPLBACKEND=Agg` no ambiente e saiu sem
+figuras; a 2, sem a variável e com o código inalterado, é a salva. **As
+métricas saíram idênticas nas duas.** Antes, um teste de fumaça com 1 época e
+saída descartada (`levantamento.md`, seção 4). Conclusões escritas depois da
+execução (seção 12 do notebook).
+
+Resultado (CV 5×3, média ± DP): MLP-128 com acurácia 0,831 ± 0,034, BA
+0,797 ± 0,028, **recall de anormal 0,878 ± 0,057**; regra FC > 90 com BA
+0,819 ± 0,024 e recall de anormal 0,639. **H1 confirmada; H2 empate** (a MLP
+não supera a regra em BA, mas tem recall de anormal muito maior); **H3 não
+detectado** (o split fixo sugeria o contrário, e a CV desmentiu); H4 sem
+diferença; **H5 confirmada** (recall HB 0,92 > PMI 0,82 > **MI 0,71**).
+Exemplos antes/depois em `assets/imagens/ir-alem-2/` (8 arquivos, ~560 KB,
+gerados pelo próprio notebook).
+
+Resultados e conclusões aprovados pelo humano (2026-09-23). A seção 12 do
+notebook foi reescrita depois disso **só em markdown**: as 16 células de código
+(código, outputs e `execution_count`) foram conferidas idênticas por
+comparação. Bloco "Ir Além 2" no `README.md`, em paralelo aos blocos das
+Entregas 1 e 2, sem alterar nenhuma linha existente.
+
+**Pendente (humano):**
+- vídeo de até 4 min no YouTube (não listado) e o link no `README.md` — é o
+  `TODO(humano)` da tabela de entregáveis do Ir Além 2;
+- confirmação do tutor sobre o Mendeley no lugar do Kaggle (5ter.2);
+- execução no Colab não testada (o notebook clona a `main`; a leitura dos
+  arquivos pela `main` foi conferida por HTTP depois do push).
 
 ---
 
@@ -509,7 +694,7 @@ Implicações para decisões tomadas agora:
 
 **Stack:** Python 3.12, `pandas`, `numpy`, `matplotlib`, `openpyxl`, `ucimlrepo`, `Pillow`. Notebooks compatíveis com **Jupyter e Google Colab**. Não adicionar dependência pesada sem necessidade.
 
-**Versão do Python travada em 3.12** — paridade com o runtime padrão do Google Colab (3.12.13 à data de escrita, com `numpy` 2.0.2, PyTorch 2.11, TensorFlow 2.20). Isso importa a partir da Fase 4 (Visão Computacional), quando o projeto passa a depender de TensorFlow/PyTorch e qualquer notebook rodado localmente precisa continuar compatível com o que roda no Colab.
+**Versão do Python travada em 3.12** — paridade com o runtime padrão do Google Colab (3.12.13 à data de escrita, com `numpy` 2.0.2 e PyTorch 2.11; **TensorFlow 2.21.0 / Keras 3.13.2** conferidos no pip-freeze do Colab em 2026-09-23). TensorFlow, Keras e protobuf ficam em **`requirements-ir-alem-2.txt`** (que inclui o `requirements.txt` com `-r`), não no principal: quem só roda as Fases 1 e 2 não precisa instalar o TensorFlow. Isso importa a partir da Fase 4 (Visão Computacional), quando o projeto passa a depender de TensorFlow/PyTorch e qualquer notebook rodado localmente precisa continuar compatível com o que roda no Colab.
 
 **Encoding:** UTF-8 em tudo. CSV com separador `,` e decimal `.`.
 

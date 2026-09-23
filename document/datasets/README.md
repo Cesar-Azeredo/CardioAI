@@ -33,3 +33,19 @@ Campos:
 - **Data de acesso**: data em que o dado foi baixado/verificado neste projeto.
 - **Nº de registros**: contagem real (linhas do CSV, imagens do conjunto, arquivos de texto).
 - **Citação formal**: referência no formato acadêmico padrão.
+
+## Reuso da base visual — Ir Além 2 (Fase 2)
+
+A mesma base de ECG (Mendeley, DOI `10.17632/gwbz3fsgp8.2`, CC BY 4.0) foi
+baixada de novo em **2026-09-23** pela API pública
+(`https://data.mendeley.com/public-api/zip/gwbz3fsgp8/download/2`), fora do
+repositório, por `scripts/fase-02/ir-alem-2/01_baixa_ecg_mendeley.py`: 928
+arquivos, **491 imagens únicas por MD5**, as mesmas da Fase 1.
+
+- **`processed/manifest-ir-alem-2.csv`** — 491 linhas, uma por imagem única,
+  gerado por `scripts/fase-02/ir-alem-2/03_audita_texto_impresso.py`: MD5,
+  categoria, rótulo binário (normal/anormal), representante e aliases, FC e
+  sexo **impressos na imagem** (lidos por casamento de glifos), aviso
+  "Lead Off" e posição da borda da moldura. **Não contém ID do exame nem
+  data/hora** (decisão LGPD). Detalhes em
+  `document/fase-02/ir-alem-2/levantamento.md`.

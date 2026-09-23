@@ -54,3 +54,7 @@ assets/imagens/*
 !assets/imagens/amostras/
 !assets/imagens/amostras/**
 !assets/imagens/LEIA-ME.md
+# Ir Alem 2 — 4 pares antes/depois do pre-processamento (exemplos leves,
+# entregavel). O conjunto completo continua fora do Git.
+!assets/imagens/ir-alem-2/
+!assets/imagens/ir-alem-2/**
