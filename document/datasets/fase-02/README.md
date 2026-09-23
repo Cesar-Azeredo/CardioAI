@@ -148,6 +148,100 @@ a ficha fica aqui, com a dos demais dados autorais da Fase 2.)
   1 de sintoma compartilhado, 1 só com variante leiga, 1 com negação
   explícita, 1 de infarto atípico (sem dor no peito).
 
+### Ficha — `frases-rotuladas-risco.csv` (Parte 2 — treino e avaliação)
+
+- **Autoria**: Grupo Zion. Redação inicial preparada com apoio de assistente
+  de IA (Claude Code) e submetida à revisão do grupo antes do commit.
+- **Data de criação**: 2026-09-23.
+- **Nº de frases** (contado por `scripts/fase-02/06_verifica_dataset_risco.py`):
+  **80** — 40 `alto risco` e 40 `baixo risco`.
+- **Natureza**: dado **sintético**; nenhuma frase é relato de paciente real.
+- **Congelado desde 2026-09-23**, depois da revisão do grupo (SHA-256
+  conferido por `scripts/fase-02/06_verifica_dataset_risco.py`, junto com o
+  do `desafio-risco.csv`): o dataset não muda para acomodar resultado do
+  classificador.
+- **Estrutura**: as duas primeiras colunas são exatamente `frase,situacao`
+  (cabeçalho do enunciado), com valores `alto risco` e `baixo risco`; depois,
+  `sinal_de_alerta` (códigos I1–I7 e A1–A6 do critério; vazio no baixo risco)
+  `tipo_frase` (`infarto-literal`, `infarto-leigo`, `avc-literal`,
+  `avc-leigo`, `combinado`, `benigno-corpo`, `benigno-negacao`,
+  `benigno-outro`) e `marcador_genero` (`feminino`, `masculino`, `neutro` —
+  gênero de quem fala, por concordância; metadado autoral conferido por
+  script).
+- **Gênero da voz** (viés herdado da Fase 1, base Cleveland 68% masculina):
+  alto risco 7 femininas, 7 masculinas, 26 neutras; baixo risco 6, 7 e 27
+  (mínimo de 6 e 6 por classe). Antes da revisão: 1 e 4 no alto, 0 e 2 no
+  baixo. Regra em `document/fase-02/criterio-rotulo-risco.md`, seção 6.
+- **Critério de rótulo**: `document/fase-02/criterio-rotulo-risco.md`,
+  registrado **antes** de escrever as frases, com o trecho literal da fonte
+  para cada tipo de sinal:
+  - **alto risco** = pelo menos um sinal de alerta das páginas do Ministério
+    da Saúde de infarto (Texto 3) ou de AVC (Texto 4), que orientam acionar o
+    SAMU 192 ou buscar emergência — por exemplo, "Se sentir dor no peito, suor
+    frio, palidez e sensação de desmaio," / "Ligue 192 SAMU" (Texto 3) e
+    "Caso qualquer um desses sintomas apareçam, é fundamental ligar para o
+    Serviço de Atendimento Médico de Urgência (SAMU - 192)" (Texto 4);
+  - **baixo risco** = queixa leve e autolimitada, **sem nenhum** sinal de
+    alerta presente (negado pode) e sem sintoma da zona cinzenta, com
+    exclusões adicionais de segurança (dor abdominal, formigamento, tontura,
+    alteração visual, fraqueza, mal-estar, náusea).
+- **Critério de redação**: linguagem de paciente; redação própria, sem
+  paráfrase das páginas (maior sequência de palavras igual a uma página: 4;
+  limite 6); sem nome, idade exata ou identificador; nenhuma frase repete as
+  10 da Parte 1. **Diversidade deliberada contra atalho de palavra-chave**:
+  estrutura, tempo, impacto na rotina e vocabulário variados; 19 frases de
+  baixo risco com palavra de corpo que também aparece no alto risco (costas,
+  braço, perna, mão, rosto, queixo…) em contexto benigno; 6 frases de baixo
+  risco com sinal de alerta **negado**; alto risco cobre infarto, AVC e
+  combinações, com vocabulário literal e leigo. Atalhos de **estilo**
+  balanceados (`senti`, `meio`, `hora`, `esquerdo` — este só com tornozelo,
+  joelho, pé, calcanhar no baixo risco; `dói` e `dolorido` levados para o
+  alto risco, por segurança) e **sinais clínicos** mantidos (`repente`, `ar`,
+  `peso`, `fala`) — critério, seção 5.
+- **Checagens por script**: formato e contagens; trechos-fonte literais;
+  segurança do baixo risco (extrator da Parte 1 + lista de palavras vedadas
+  com escopo de negação; 2 ocorrências revisadas e registradas no script —
+  "sangrou" de um corte na mão e "dormi", que colide com "dormência" por
+  over-stemming do RSLP); quase-duplicata e vazamento (seção abaixo);
+  palavras candidatas a atalho; gênero da voz × coluna.
+- **Quase-duplicata**: cosseno TF-IDF sobre radicais de conteúdo. Limiar
+  calibrado no próprio dataset — mediana do cosseno entre cada frase e ela
+  mesma sem uma palavra de conteúdo (0,945): um par acima disso é tão
+  parecido quanto uma edição de uma palavra. Resultado: **nenhum par** das 80
+  passa do limiar (o mais parecido tem 0,384); maior cosseno entre desafio e
+  treino 0,433, entre Parte 1 e treino 0,398, entre desafio e Parte 1 0,356 —
+  sem vazamento entre conjuntos.
+- **Limitação — zona cinzenta fora do treino**: sintomas só de hipertensão
+  (dor de cabeça não súbita, zumbido, sangramento nasal, fraqueza sem lado)
+  não entram aqui. Isso torna a tarefa de treino **mais fácil** que a triagem
+  real, e a acurácia medida no notebook **superestima** o desempenho em uso
+  real.
+
+### Ficha — `desafio-risco.csv` (Parte 2 — conjunto-desafio, NÃO entra no treino)
+
+- **Autoria e data**: as mesmas do arquivo acima (Grupo Zion, com apoio de
+  IA declarado; 2026-09-23).
+- **Nº de frases**: **18**, com rótulo esperado **pré-registrado** antes de
+  qualquer treino: 10 `alto risco`, 5 `baixo risco`, 3 `indefinido`.
+- **Estrutura**: mesmo formato do treino, mais `o_que_testa` e
+  `par_contrafactual`.
+- **Composição**:
+  - 3 `desafio-negacao` — negação de sinal de alerta que um modelo de TF-IDF
+    tende a errar; esperado `baixo risco`;
+  - 3 `desafio-atipico` — infarto atípico sem a palavra "dor" (perfil
+    diabético ou idoso, Texto 3); esperado `alto risco`; testa a hipótese
+    pendente da frase 10 da Parte 1 (frase sem "dor" tende a baixo risco);
+  - 3 `desafio-zona` — zona cinzenta de hipertensão; rótulo `indefinido`:
+    **não há resposta certa**, só observação do comportamento;
+  - 3 `desafio-vocabulario` — sinal de alerta em vocabulário ausente do
+    treino (conferido pelo script: "boca", "entortou", "cara", "amortecida";
+    "palavras", "trocadas"; "cinto", "pinga", "testa"); esperado `alto risco`;
+  - 3 pares `desafio-genero` (G1 infarto atípico sem dor, G2 alto risco
+    clássico, G3 baixo risco) — frases idênticas exceto pela concordância de
+    gênero (conferido por script); **esperado: predição idêntica dentro de
+    cada par**. Diferença dentro de um par = gênero da voz influenciando a
+    triagem.
+
 ## Git
 
 O `.gitignore` do template ignora `*.csv`; a negação
