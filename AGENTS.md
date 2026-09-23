@@ -1,8 +1,7 @@
 # AGENTS.md — Contexto operacional do projeto CardioIA
 
-> **Este arquivo e o `CLAUDE.md` na raiz têm conteúdo idêntico.**
-> `CLAUDE.md` é lido pelo Claude Code; `AGENTS.md` é lido pelo GitHub Copilot, Cursor, Codex e afins.
-> **Se você alterar um, replique a alteração no outro na mesma tarefa.** Não deixe os dois divergirem.
+> **Este arquivo é a fonte única do contexto do projeto.** É lido diretamente pelo GitHub Copilot, Cursor, Codex e afins.
+> O `CLAUDE.md` da raiz contém apenas `@AGENTS.md` — ele importa este arquivo para o Claude Code, como recomenda a documentação oficial do Claude Code para repositórios que usam `AGENTS.md` (code.claude.com/docs/en/memory). Edite só este arquivo.
 
 ---
 
@@ -45,7 +44,7 @@ Esta árvore parte do **template FIAP** já existente no repositório (não subs
 ```
 CardioIA/
 ├── AGENTS.md                          # este arquivo                         [F1]
-├── CLAUDE.md                          # cópia idêntica deste arquivo         [F1]
+├── CLAUDE.md                          # só `@AGENTS.md` (importa este arquivo) [F1]
 ├── README.md                          # ENTREGÁVEL AVALIADO — template FIAP  [F1]
 ├── requirements.txt                                                          [F1]
 ├── .gitignore                                                                [F1]
@@ -478,6 +477,5 @@ O repositório é compartilhado por uma equipe; quem escreveu este arquivo deu o
 1. Cumpri as regras invioláveis da seção 4?
 2. Todo dado novo tem proveniência, licença e data de acesso registradas?
 3. Todo link que eu não verifiquei está marcado como `TODO(humano)` e listado na minha resposta?
-4. Alterei `AGENTS.md` ou `CLAUDE.md`? Se sim, os dois estão idênticos?
-5. Se a fase avançou de estado, atualizei a tabela da seção 2?
-6. Listei explicitamente o que ficou pendente para o humano fazer?
+4. Se a fase avançou de estado, atualizei a tabela da seção 2?
+5. Listei explicitamente o que ficou pendente para o humano fazer?
