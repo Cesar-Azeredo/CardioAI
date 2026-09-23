@@ -6,11 +6,11 @@ Arquivo **gerado** por `scripts/fase-02/02_extrai_sintomas_sugere_diagnostico.py
 
 ## Cabeçalho da execução
 
-- Data: 2026-09-23T11:11:07-03:00
+- Data: 2026-09-23T11:45:06-03:00
 - Protocolo `document/fase-02/protocolo-extrator.md`: `90ed4cf356de81d400f25dd3b2f2cc303b01d9cb3bac67880b1a7a4aeaea2da4`
 - Mapa `document/datasets/fase-02/mapa-conhecimento-sintomas.csv`: `79fae46c6cfd8418eaed30b39f8c84f8eca80b9f0e3ac086ceedac18b91d63c3`
 - Frases `assets/textos/fase-02/frases-sintomas-pacientes.txt`: `e124a24e4532e5f008fdfe0d47b6e5638c3cc53409350c39bf96bf731e48c91b`
-- Código `scripts/fase-02/02_extrai_sintomas_sugere_diagnostico.py`: `1cc1b79a013d63151890f0791ce1737fc1eb23ebd93c3271f42457110ac10ce4`
+- Código `scripts/fase-02/02_extrai_sintomas_sugere_diagnostico.py`: `589165b6a71599d052da9e8aec9780d9e57b07050e180e65678c4f910b649657`
 - Testes `scripts/fase-02/03_testa_extrator.py`: `4731e09094a3b645400363f70747cc3e0a23f889d94247562e81b55d9addd9cb`
 - Python 3.12.14, nltk 3.9.1
 - Recursos da NLTK (protocolo 2.5):
@@ -34,7 +34,7 @@ Arquivo **gerado** por `scripts/fase-02/02_extrai_sintomas_sugere_diagnostico.py
 
 Explicações redigidas com apoio de assistente de IA, revisadas e aprovadas pelo grupo.
 
-> A coluna "Explicação da divergência" foi preenchida **depois** da geração deste arquivo, como prevê o protocolo (10.4), com o texto aprovado pelo grupo (revisão de Cesar Martinho de Azeredo). O restante do arquivo é a saída da execução única, sem alteração. Uma nova execução do extrator regenera o arquivo e apaga esta coluna.
+> A coluna "Explicação da divergência" foi escrita pelo grupo **depois** da execução única, como prevê o protocolo (10.4) (revisão de Cesar Martinho de Azeredo). O texto vive em `document/fase-02/explicacoes-divergencia.md` (autoria humana) e é mesclado pelo gerador a cada regeneração; o restante deste arquivo é saída do extrator.
 
 Acerto de doença — baseline exato: **8/10**; método: **9/10**.
 Só nas frases não contaminadas (2, 4, 5, 6, 7, 8, 9) — baseline: **6/7**; método: **6/7**.

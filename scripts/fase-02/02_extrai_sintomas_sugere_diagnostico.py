@@ -35,6 +35,7 @@ MAPA_PATH = RAIZ / "document" / "datasets" / "fase-02" / "mapa-conhecimento-sint
 FRASES_PATH = RAIZ / "assets" / "textos" / "fase-02" / "frases-sintomas-pacientes.txt"
 PROTOCOLO_PATH = RAIZ / "document" / "fase-02" / "protocolo-extrator.md"
 RESULTADO_PATH = RAIZ / "document" / "fase-02" / "resultado-extrator.md"
+EXPLICACOES_PATH = RAIZ / "document" / "fase-02" / "explicacoes-divergencia.md"  # autoria humana
 TESTES_PATH = RAIZ / "scripts" / "fase-02" / "03_testa_extrator.py"
 
 AVISO = "Simulação acadêmica (FIAP — CardioIA, Fase 2). Sem validade para diagnóstico ou decisão médica."
@@ -412,7 +413,28 @@ def linhas_detalhe(r: dict) -> list[str]:
     return out
 
 
+def ler_explicacoes() -> tuple[dict[int, str], str | None]:
+    """Textos de autoria humana mesclados no relatorio (so escrita; nenhuma regra
+    do protocolo depende disto). Devolve {frase: texto} e a nota abaixo da tabela."""
+    if not EXPLICACOES_PATH.exists():
+        return {}, None
+    secoes: dict[str, list[str]] = {}
+    atual = None
+    for linha in EXPLICACOES_PATH.read_text(encoding="utf-8").splitlines():
+        if linha.startswith("## "):
+            atual = linha[3:].strip()
+            secoes[atual] = []
+        elif atual is not None:
+            secoes[atual].append(linha)
+    textos = {int(nome.split()[1]): " ".join(l.strip() for l in corpo if l.strip())
+              for nome, corpo in secoes.items() if nome.startswith("Frase ")}
+    nota = "\n".join(secoes.get("Nota abaixo da tabela", [])).strip() or None
+    return textos, nota
+
+
 def relatorio(frases: list[str], resultados: list[tuple[dict, dict]], recursos: list[dict]) -> str:
+    explicacoes, nota = ler_explicacoes()
+    sem_texto = "—" if EXPLICACOES_PATH.exists() else "*(a escrever pelo grupo)*"
     agora = datetime.now().astimezone().isoformat(timespec="seconds")
     out = [
         "# Resultado do extrator de sintomas — Fase 2",
@@ -443,12 +465,14 @@ def relatorio(frases: list[str], resultados: list[tuple[dict, dict]], recursos: 
         esperado = GABARITO[n][0] + (f", confiança {GABARITO[n][1]}" if GABARITO[n][1] else "")
         out.append(
             f"| {n} | {esperado} | {rotulo(b)} ({b['confianca']}) | {rotulo(m)} ({m['confianca']}) | "
-            f"{acerto(n, b)} | {acerto(n, m)} | {'sim' if n in CONTAMINADAS else 'não'} | *(a escrever pelo grupo)* |")
+            f"{acerto(n, b)} | {acerto(n, m)} | {'sim' if n in CONTAMINADAS else 'não'} | {explicacoes.get(n, sem_texto)} |")
     tot_b = sum(acerto(n, b).startswith(("acerto", "doença acerto")) for n, (b, _) in enumerate(resultados, 1))
     tot_m = sum(acerto(n, m).startswith(("acerto", "doença acerto")) for n, (_, m) in enumerate(resultados, 1))
     limpas = [n for n in range(1, len(resultados) + 1) if n not in CONTAMINADAS]
     lim_b = sum(acerto(n, resultados[n - 1][0]).startswith(("acerto", "doença acerto")) for n in limpas)
     lim_m = sum(acerto(n, resultados[n - 1][1]).startswith(("acerto", "doença acerto")) for n in limpas)
+    if nota:
+        out += ["", nota]
     out += ["",
             f"Acerto de doença — baseline exato: **{tot_b}/10**; método: **{tot_m}/10**.",
             f"Só nas frases não contaminadas ({', '.join(map(str, limpas))}) — baseline: **{lim_b}/{len(limpas)}**; método: **{lim_m}/{len(limpas)}**.",
