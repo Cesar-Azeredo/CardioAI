@@ -30,6 +30,13 @@ alguma regra dura falhar:
              masculinas marcadas em cada classe do treino.
   CONTRAFACTUAL  no desafio, cada par_contrafactual tem 2 frases (feminino e
              masculino), mesmo rotulo, texto identico exceto a concordancia.
+  FUNCIONAIS (INFORMATIVO — adicionado depois do achado do classificador)
+             palavras funcionais (stopwords da NLTK) por classe, na MESMA
+             representacao do TfidfVectorizer do notebook. A tabela ATALHO acima
+             so via palavras de conteudo; o classificador mantem as stopwords, e
+             "mas" (0 alto / 10 baixo) e "eu" (7 / 0) passaram pelo ponto cego.
+             Nao reprova nada: o dataset continua congelado e a regra de parada
+             do balanceamento nao se aplica retroativamente.
 """
 
 from __future__ import annotations
@@ -381,6 +388,22 @@ def main() -> int:
     compart = sorted(((min(c.values()), r) for r, c in df.items() if len(c) == 2), reverse=True)[:8]
     print("\nmais frequentes nas duas classes (alto/baixo): " + ", ".join(
         f"{exemplo[r].most_common(1)[0][0]} ({df[r]['alto risco']}/{df[r]['baixo risco']})" for _, r in compart))
+
+    print("\n" + "=" * 78 + "\nFUNCIONAIS — informativo, adicionado depois do achado (não reprova)\n" + "=" * 78)
+    analisador = TfidfVectorizer(lowercase=True, strip_accents="unicode").build_analyzer()  # igual ao notebook
+    funcionais = {analisador(w)[0] for w in norm.stopwords if analisador(w)}
+    df_f = defaultdict(Counter)
+    for l in treino:
+        for w in set(analisador(l["frase"])) & funcionais:
+            df_f[w][l["situacao"]] += 1
+    so_uma = sorted(((sum(c.values()), w, next(iter(c))) for w, c in df_f.items() if len(c) == 1), reverse=True)
+    print(f"representação do classificador (minúsculas, sem acento, sem remover stopwords); "
+          f"{len(so_uma)} palavras funcionais aparecem numa classe só:")
+    print(f"{'palavra':10} {'classe':12} {'frases':>6}")
+    for n, w, classe in so_uma[:12]:
+        print(f"{w:10} {classe:12} {n:>6}")
+    print("nas duas classes (alto/baixo): " + ", ".join(
+        f"{w} ({df_f[w]['alto risco']}/{df_f[w]['baixo risco']})" for w in ("sem", "do", "quando", "nao") if w in df_f))
 
     print()
     if falhas:
