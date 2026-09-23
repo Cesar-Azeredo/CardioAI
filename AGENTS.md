@@ -416,10 +416,18 @@ não é criado.
   (baseline exato 8/10, método 9/10; nas 7 frases não contaminadas, 6/7 os
   dois). Rodar de novo nas frases só por bug, reportando os dois resultados.
 
+- **Adendo pós-execução** (`document/fase-02/adendo-pos-execucao.md`),
+  sem descongelar o protocolo: U15 em arquivo próprio
+  (`scripts/fase-02/04_testa_extrator_adendo.py`) fecha a lacuna de cobertura
+  achada pela checagem de mutação (`05_checa_mutacao_testes.py`: 5/5
+  mutações pegas); limitação documentada — a oração que limita a negação
+  também limita o casamento (frase 9); explicações da divergência em
+  `document/fase-02/explicacoes-divergencia.md` (autoria humana), mescladas
+  pelo gerador — rodar o extrator ao vivo não apaga nada.
+
 ### 5bis.5 Decisões ainda em aberto
 
 - Itens "Ir Além".
-- Lacuna de cobertura da bateria U1–U14: nenhum teste exercita um `sem` consumido que negaria **outro** termo da oração (checagem de mutação). Acrescentar um U15 exige descongelar o protocolo — decisão do humano.
 
 ### 5bis.6 Definition of Done da Fase 2
 
