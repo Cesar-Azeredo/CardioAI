@@ -95,3 +95,31 @@ NLP. Situação de cada uma, **sem fingir cumprimento**:
 |---|---|
 | Métricas estratificadas por sexo e faixa etária, não só acurácia global | **Transferido em espírito** para o classificador de texto. Não há sexo nem idade nas frases (e inventar essas variáveis em dado sintético seria estratificação de fachada), mas o princípio — não esconder o erro caro atrás de uma média — se aplica integralmente. O notebook reporta matriz de confusão, recall e F1 **por classe**, com destaque para o **recall de "alto risco"**, e explica por que acurácia global é insuficiente, retomando a assimetria de custo da Fase 1: um falso negativo em alto risco é um paciente mandado para casa durante um evento cardíaco. |
 | Imputação de `ca`/`thal` dentro de cada fold, nunca antes do split | **Adiado formalmente.** Nenhum entregável da Fase 2 modela o UCI, então não há split nem fold onde cumpri-lo. O compromisso segue para a **Fase 6**, primeira fase do roadmap que consome o dataset numérico. `document/datasets/dicionario-de-dados.md` foi atualizado para refletir isso. |
+
+## Reprodutibilidade dos artefatos da Fase 1
+
+Ao avaliar a subida do `numpy` de `2.0.2` para `2.1.3` (versão atual do
+Colab), os scripts 01–05 da Fase 1 foram rodados de ponta a ponta em venv
+limpa, nas duas versões, e os artefatos regerados foram comparados com os
+versionados (2026-09-23):
+
+- **Byte-idênticos nas duas versões:** `heart-disease-processed.csv`, os
+  dois `.txt` da Fase 1, `assets/textos/PROVENIENCIA.md`,
+  `manifest-imagens.csv`, as 12 amostras de `assets/imagens/amostras/` e as
+  120 imagens selecionadas.
+- **`heart-disease-processed.xlsx` não é byte-reprodutível**, com nenhuma
+  versão de numpy: o único arquivo interno do `.xlsx` que difere é
+  `docProps/core.xml`, onde o openpyxl grava a data e hora de criação do
+  arquivo (`dcterms:created`/`dcterms:modified`). A planilha em si
+  (`xl/worksheets/sheet1.xml`), estilos, workbook e demais partes são
+  idênticos. **Isso não afeta os dados** — só o carimbo de quando o arquivo
+  foi gerado.
+
+Decisão: **numpy permanece em `2.0.2`.** A regressão de conteúdo passou, mas
+a subida não traz benefício — quando o notebook for aberto no Colab, ele usa
+o numpy do próprio Colab, não o do `requirements.txt`. Nenhum artefato da
+Fase 1 foi alterado nesta verificação (tudo rodou em cópias do repositório,
+fora da árvore versionada).
+
+Consequência para quem comparar hashes no futuro: comparar o `.xlsx` por
+conteúdo (planilha e estilos), não pelo MD5 do arquivo inteiro.

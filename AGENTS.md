@@ -363,8 +363,11 @@ não é criado.
   Resultado (2026-09-23): CSV, `.txt`, `PROVENIENCIA.md`, manifest, 12
   amostras e 120 selecionadas idênticos; o `.xlsx` diverge **só** em
   `docProps/core.xml` (carimbo de data/hora do openpyxl) — e diverge igual
-  no controle com `2.0.2`. Não é efeito do numpy, mas o critério não passou;
-  numpy não subiu. Reabrir só por decisão do humano.
+  no controle com `2.0.2`. O critério byte-idêntico estava mal especificado
+  (o `.xlsx` carrega carimbo de criação e diverge com qualquer versão); a
+  regressão de **conteúdo** passou. **Decisão encerrada: numpy fica em
+  `2.0.2`** — a subida não traz benefício, porque no Colab o notebook usa o
+  numpy do próprio Colab. Registrado em `document/fase-02/governanca-e-vies.md`.
 - Textos coletados por `scripts/fase-02/00_coleta_fontes_mapa.py`, que prova a
   cada execução que o `.txt` tem exatamente as palavras da página (cláusula ND).
   Proveniência em `assets/textos/fase-02/PROVENIENCIA.md` — arquivo separado
@@ -375,20 +378,48 @@ não é criado.
 - **Mapa:** `document/datasets/fase-02/mapa-conhecimento-sintomas.csv`. As três
   primeiras colunas são **literalmente** `Sintoma 1`, `Sintoma 2`,
   `Doença Associada` (estrutura mostrada no enunciado); as de proveniência
-  (`tipo_termo`, `fonte`, `trecho_literal`, `observacao`) vêm depois. Termo
-  `tipo_termo=fonte` só entra se aparecer literalmente no `.txt` indicado,
-  verificado por script. Variante leiga é permitida, marcada como tal.
-  Sintoma compartilhado entre doenças fica duplicado por doença, não
-  escondido.
+  (`tipo_termo`, `fonte`, `trecho_literal`, `observacao`) vêm depois.
+  **Cada linha é um conceito de sintoma com um sinônimo** (como nos exemplos
+  do enunciado: "dor no peito", "aperto no tórax" → Infarto) — não um par de
+  sintomas diferentes. Sintoma 1 é sempre termo literal da página;
+  `tipo_termo` descreve Sintoma 2 (`literal` ou `variante_leiga`); um
+  conceito pode ter várias linhas, uma por sinônimo. Correção de erro de
+  digitação da fonte ("da falar" → "da fala") só com o texto original
+  preservado em `trecho_literal` e a correção declarada em `observacao`.
+  Conceito compartilhado entre doenças tem uma linha por doença. Tudo
+  verificado por `scripts/fase-02/01_verifica_mapa_e_frases.py`. **Mapa
+  congelado** desde 2026-09-23 (53 linhas, 26 conceitos; SHA-256 conferido):
+  não recebe variantes para acertar frases de teste — melhorias legítimas
+  estão no método de casamento, e só valem se decididas antes de rodar nas
+  frases.
 - **10 frases = casos de teste do extrator**, com gabarito em
   `document/fase-02/`: 2 infarto, 2 AVC, 2 hipertensão, 1 sintoma
   compartilhado, 1 só variante leiga, 1 negação, 1 infarto atípico (idoso ou
-  diabético sem dor no peito — deve falhar ou ficar ambíguo no extrator
-  léxico, de propósito).
+  diabético sem dor no peito). **Frases congeladas** desde 2026-09-23: não
+  mudam para acomodar o extrator (o verificador confere o SHA-256); falha em
+  linguagem natural é resultado a reportar.
+- **Extrator reporta quantos sintomas casou e um nível de confiança.** Não se
+  adota número mínimo de sintomas para forçar ou evitar falha. Esperado da
+  frase 10: "Infarto, baixa confiança (1 sintoma)"; a falha perigosa desse
+  perfil (frase sem "dor" → baixo risco) é demonstrada na Parte 2, no
+  classificador de risco.
+
+- **Protocolo do extrator pré-registrado e congelado** em
+  `document/fase-02/protocolo-extrator.md` (SHA-256 conferido pelo
+  verificador): RSLP (`nltk==3.9.1`, recursos em `.cache/nltk_data` conferidos
+  por hash — divergência vira aviso, não interrupção), proximidade ordenada
+  com intervalo de 2, negação estilo NegEx, sobreposição por termo mais longo,
+  localização só com dor na oração, pontuação por conceito, níveis de
+  confiança fixos. Extrator: `scripts/fase-02/02_extrai_sintomas_sugere_diagnostico.py`;
+  testes U1–U14: `scripts/fase-02/03_testa_extrator.py`. Execução única nas
+  10 frases feita em 2026-09-23 → `document/fase-02/resultado-extrator.md`
+  (baseline exato 8/10, método 9/10; nas 7 frases não contaminadas, 6/7 os
+  dois). Rodar de novo nas frases só por bug, reportando os dois resultados.
 
 ### 5bis.5 Decisões ainda em aberto
 
 - Itens "Ir Além".
+- Lacuna de cobertura da bateria U1–U14: nenhum teste exercita um `sem` consumido que negaria **outro** termo da oração (checagem de mutação). Acrescentar um U15 exige descongelar o protocolo — decisão do humano.
 
 ### 5bis.6 Definition of Done da Fase 2
 
