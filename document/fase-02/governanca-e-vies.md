@@ -1,0 +1,97 @@
+# Governança de dados e viés — Fase 2
+
+Complementa `document/fase-01/governanca-e-vies.md` (que continua valendo
+para as bases da Fase 1) com as decisões de governança tomadas na Fase 2.
+Decisões numeradas conforme a seção 5bis do `CLAUDE.md`/`AGENTS.md`.
+
+## Fontes do mapa de conhecimento
+
+| Doença | Fonte | Licença verificada | Data de acesso |
+|---|---|---|---|
+| Hipertensão | Texto 2 da Fase 1 — Ministério da Saúde, "Hipertensão (pressão alta)" | **CC BY-ND 3.0** | 2026-08-27 |
+| Infarto | Texto 3 — Ministério da Saúde, "Infarto" (Saúde de A a Z) | **CC BY-ND 3.0** | 2026-09-23 |
+| AVC | Texto 4 — Ministério da Saúde, "Acidente Vascular Cerebral (AVC)" (Saúde de A a Z) | **CC BY-ND 3.0** | 2026-09-23 |
+
+Fichas completas em `assets/textos/PROVENIENCIA.md` (Texto 2) e
+`assets/textos/fase-02/PROVENIENCIA.md` (Textos 3 e 4). Licença lida do link
+`rel="license"` de cada página no momento da coleta, não assumida.
+
+### Fontes complementares da BVS — retiradas do escopo
+
+**Fontes complementares da BVS inacessíveis (HTTP 503 em todo o domínio,
+verificado por script e navegador em 2026-09-23), retiradas do escopo.**
+
+- Páginas: `https://bvsms.saude.gov.br/ataque-cardiaco-infarto/` e
+  `https://bvsms.saude.gov.br/avc-acidente-vascular-cerebral/`.
+- O servidor devolveu a página de bloqueio do WAF ("The requested URL was
+  rejected") para qualquer URL do domínio, inclusive a home — via `requests`
+  com cabeçalhos de navegador e via navegador real (Playwright).
+- Eram **complementares**: infarto e AVC já têm fonte primária do Ministério
+  da Saúde no gov.br. Por isso a decisão foi retirar, não contornar.
+- Consequência: **nenhuma linha do mapa se apoia nelas**, e o script de
+  coleta (`scripts/fase-02/00_coleta_fontes_mapa.py`) não tenta mais
+  baixá-las, para não depender de domínio fora do ar.
+
+### Lacuna documentada: insuficiência cardíaca e angina
+
+O mapa cobre **três doenças — hipertensão, infarto e AVC**. Não cobre
+insuficiência cardíaca nem angina, e isso é decisão, não esquecimento:
+
+- não há página equivalente do Ministério da Saúde (Saúde de A a Z) para
+  insuficiência cardíaca nem para angina; as fontes encontradas pelo grupo
+  para essas duas condições são de hospital privado, sem o mesmo peso
+  institucional;
+- **preferimos três doenças com proveniência oficial a cinco com metade sem
+  fonte verificável.** Num mapa de conhecimento que alimenta sugestão de
+  diagnóstico, uma linha sem fonte é uma afirmação clínica sem lastro — e o
+  extrator a usaria com o mesmo peso das linhas com fonte;
+- o enunciado cita insuficiência cardíaca e angina **apenas como exemplo de
+  formato**, não como requisito de cobertura.
+
+Efeito prático a registrar desde já: um relato típico de insuficiência
+cardíaca ou de angina **não tem para onde ser mapeado** — o extrator só
+pode sugerir uma das três doenças do mapa, ou nenhuma. Isso é limitação
+conhecida do escopo, não erro do extrator.
+
+**Observação sobre a restrição de licença:** as três páginas são CC BY-ND
+3.0. O mapa de conhecimento **analisa** os textos (extrai o termo e cita o
+trecho literal que o ancora), o que a licença permite; as frases de paciente
+são redação própria do grupo, sem paráfrase de trecho das páginas.
+
+## Exceção à regra 4 — dado primário autoral sintético
+
+A regra 4 do `CLAUDE.md`/`AGENTS.md` ("nunca edite arquivos de dados
+manualmente") proíbe **transformar** dado à mão: todo dado derivado precisa
+sair de script reprodutível. Os artefatos da Fase 2 abaixo **não são
+transformação — são a origem**:
+
+- `assets/textos/fase-02/frases-sintomas-pacientes.txt` (10 frases);
+- `document/datasets/fase-02/mapa-conhecimento-sintomas.csv`;
+- o `.csv` de frases rotuladas em alto/baixo risco (80 frases, 40/40).
+
+Cada frase, cada rótulo e cada linha do mapa é uma **decisão de autoria** do
+grupo — não existe arquivo anterior do qual eles pudessem ser derivados por
+script. Tratá-los como dado primário sintético autoral é a descrição honesta
+do que eles são.
+
+A exceção tem limites:
+
+1. vale **só** para o dado primário; qualquer derivado dele (extração de
+   sintomas, features TF-IDF, métricas) sai de script;
+2. todo arquivo autoral tem ficha em `document/datasets/fase-02/README.md`:
+   autores, data, critério de redação, critério de rotulagem/inclusão;
+3. o que puder ser checado por máquina é checado por script — no mapa, todo
+   termo marcado como vindo da fonte é verificado literalmente contra o
+   `.txt` indicado; linha que não passa não entra.
+
+## Compromissos assumidos na Fase 1
+
+A tabela de mitigações de `document/fase-01/governanca-e-vies.md` atribuiu
+duas mitigações à Fase 2. As duas foram escritas quando o roadmap previa que
+a Fase 2 modelaria o dataset numérico (UCI); o enunciado real da Fase 2 é de
+NLP. Situação de cada uma, **sem fingir cumprimento**:
+
+| Compromisso da Fase 1 | Situação na Fase 2 |
+|---|---|
+| Métricas estratificadas por sexo e faixa etária, não só acurácia global | **Transferido em espírito** para o classificador de texto. Não há sexo nem idade nas frases (e inventar essas variáveis em dado sintético seria estratificação de fachada), mas o princípio — não esconder o erro caro atrás de uma média — se aplica integralmente. O notebook reporta matriz de confusão, recall e F1 **por classe**, com destaque para o **recall de "alto risco"**, e explica por que acurácia global é insuficiente, retomando a assimetria de custo da Fase 1: um falso negativo em alto risco é um paciente mandado para casa durante um evento cardíaco. |
+| Imputação de `ca`/`thal` dentro de cada fold, nunca antes do split | **Adiado formalmente.** Nenhum entregável da Fase 2 modela o UCI, então não há split nem fold onde cumpri-lo. O compromisso segue para a **Fase 6**, primeira fase do roadmap que consome o dataset numérico. `document/datasets/dicionario-de-dados.md` foi atualizado para refletir isso. |
