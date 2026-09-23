@@ -424,6 +424,18 @@ não é criado.
   também limita o casamento (frase 9); explicações da divergência em
   `document/fase-02/explicacoes-divergencia.md` (autoria humana), mescladas
   pelo gerador — rodar o extrator ao vivo não apaga nada.
+- **Parte 2 — dataset rotulado.** Critério registrado antes das frases em
+  `document/fase-02/criterio-rotulo-risco.md`: alto risco = ≥1 sinal de
+  alerta das páginas de infarto/AVC (códigos I1–I7, A1–A6, com trecho
+  literal); baixo risco = queixa leve sem sinal de alerta presente e com
+  exclusões de segurança. **Zona cinzenta** (só hipertensão) fora do treino,
+  só no desafio com rótulo `indefinido` — limitação: a acurácia medida
+  superestima o uso real. Arquivos: `frases-rotuladas-risco.csv` (80, 40/40,
+  cabeçalho `frase,situacao`) e `desafio-risco.csv` (18, fora do treino, com 3 pares contrafactuais de gênero).
+  Verificação: `scripts/fase-02/06_verifica_dataset_risco.py`. Voz de gênero
+  balanceada por classe (≥6 F e ≥6 M; coluna `marcador_genero`), atalhos de
+  estilo balanceados com regra de parada (critério, seção 5.1). **Dataset e
+  desafio congelados** (SHA-256 no script 06) desde 2026-09-23.
 
 ### 5bis.5 Decisões ainda em aberto
 

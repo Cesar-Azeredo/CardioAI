@@ -123,3 +123,36 @@ fora da árvore versionada).
 
 Consequência para quem comparar hashes no futuro: comparar o `.xlsx` por
 conteúdo (planilha e estilos), não pelo MD5 do arquivo inteiro.
+
+## Viés de gênero: apoio de fonte aos achados da Fase 1
+
+Referência: Mehta, L. S. et al. (2016). *Acute Myocardial Infarction in
+Women*. Circulation, 133(9), 916–947. DOI `10.1161/CIR.0000000000000351`
+(declaração científica da American Heart Association; conteúdo verificado
+pelo grupo na página da editora em 2026-09-23; o texto do artigo não é
+reproduzido no repositório). Os dois achados abaixo estão em paráfrase.
+
+1. **Escores de risco desenvolvidos em populações masculinas.** A seção
+   *Prognostic Factors* da declaração afirma que os escores de risco para
+   síndrome coronariana aguda foram desenvolvidos em populações pelo menos
+   dois terços masculinas e que o desempenho deles em mulheres não está bem
+   estabelecido. É o mesmo padrão da base Cleveland usada na Fase 1 (68%
+   masculina — ver `document/fase-01/governanca-e-vies.md`) e o risco que o
+   teste contrafactual de gênero do conjunto-desafio (pares G1–G3,
+   `document/datasets/fase-02/desafio-risco.csv`) vai medir no classificador
+   da Fase 2.
+2. **Mulheres encaminhadas menos para investigação invasiva.** A declaração
+   relata que mulheres com síndrome coronariana aguda passam menos por
+   cateterismo e angiografia, em parte porque o risco delas é subestimado.
+   Isso dá apoio de fonte à hipótese de **viés de encaminhamento** levantada
+   na Fase 1 para a base Cleveland (pacientes encaminhados para angiografia;
+   mulheres sub-representadas entre os casos investigados).
+
+A Fase 1 foi entregue e avaliada e **não é alterada**: este registro fica só
+na Fase 2 e remete ao documento da Fase 1.
+
+Consequência prática nesta fase: o dataset rotulado da Parte 2 balanceia a
+voz de gênero por classe (mínimo de 6 femininas e 6 masculinas marcadas em
+cada uma) e o conjunto-desafio traz pares contrafactuais com predição
+esperada idêntica — critério em `document/fase-02/criterio-rotulo-risco.md`,
+seção 6.
