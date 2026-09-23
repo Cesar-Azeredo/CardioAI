@@ -1,0 +1,17 @@
+# Ir Alem 2 — MLP em Keras sobre as imagens de ECG
+# (notebooks/fase-02/ir-alem-2/ir-alem-2-mlp-ecg.ipynb).
+#
+# Arquivo separado do requirements.txt de proposito: quem so roda as Fases 1
+# e 2 nao precisa instalar o TensorFlow (~600 MB). Inclui o principal e
+# acrescenta tres pacotes:
+#     pip install -r requirements-ir-alem-2.txt
+-r requirements.txt
+
+# Versoes do pip-freeze oficial do Colab (github.com/googlecolab/backend-info,
+# commit ac5f3b6 de 2026-09-23). Wheel cp312 macosx_12_0_arm64 confirmado;
+# instalacao testada em venv limpa, mantendo numpy 2.0.2 do requirements.txt,
+# pip check sem conflito. protobuf fixado porque sem pin o pip resolve 7.x, e
+# o Colab esta em 6.33.6 (mesmo motivo do pin de scipy no requirements.txt).
+tensorflow==2.21.0
+keras==3.13.2
+protobuf==6.33.6
