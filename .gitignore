@@ -18,6 +18,9 @@
 # document/datasets/fase-02/README.md. So .csv: nenhuma planilha nesta pasta.
 !document/datasets/fase-02/*.csv
 
+# Fase 2 — recursos da NLTK baixados pelo extrator (protocolo 2.5); regeneraveis.
+.cache/
+
 # Python
 __pycache__/
 *.py[cod]
