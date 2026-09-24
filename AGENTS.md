@@ -21,6 +21,7 @@ Consequências práticas, que valem como regra:
 - **Nunca apague, renomeie ou reescreva artefatos de fases já entregues.** As fases são **aditivas**.
 - **Nunca organize o repositório como "uma pasta isolada por fase".** Organize por **função** (`data/`, `docs/`, `notebooks/`, `scripts/`, `src/`) e use subpastas por fase **dentro** dessas pastas. Motivo: a Fase 2 vai treinar modelos sobre o CSV da Fase 1, a Fase 4 vai processar as imagens da Fase 1 e a Fase 5 vai usar os textos da Fase 1. Duplicar dado por fase quebra isso.
 - Ao iniciar uma fase nova, **leia primeiro o que as fases anteriores produziram** antes de escrever qualquer código.
+- **Exceção explícita — Ir Além 1 (portal React + Vite):** vive num repositório separado, [`Cesar-Azeredo/grupo-zion-cardioia-portal`](https://github.com/Cesar-Azeredo/grupo-zion-cardioia-portal), porque **o enunciado exige repositório próprio com nome definido**. É a única exceção; não abre precedente — qualquer outra entrega fica neste monorepo. Detalhes na seção 5quater.
 
 ---
 
@@ -30,6 +31,7 @@ Consequências práticas, que valem como regra:
 |---|---|
 | **Fase em andamento** | **Fase 2 — Diagnóstico Automatizado** — todos os entregáveis prontos e integrados na `main` (merge `--no-ff` da branch `fase-02/nlp-triagem`, 2026-09-23); **falta só o vídeo** (ver 5bis.6) |
 | Entrega extra em andamento | **Ir Além 2 — MLP em Keras sobre ECG** (branch `ir-alem-2/mlp-ecg`) — notebook executado, README e exemplos prontos, integrado na `main` (merge `--no-ff` da branch `ir-alem-2/mlp-ecg`, 2026-09-23); **falta o vídeo e a confirmação do tutor** (ver 5ter.6) |
+| Entrega extra publicada | **Ir Além 1 — Portal CardioIA (React + Vite)** — **repositório separado** (exceção à regra de monorepo, ver 5quater): [repositório](https://github.com/Cesar-Azeredo/grupo-zion-cardioia-portal) · [portal publicado](https://cesar-azeredo.github.io/grupo-zion-cardioia-portal/) (GitHub Pages, 2026-09-24); bloco curto no `README.md`; **falta o vídeo**, que vive no repositório do portal |
 | Fases concluídas | **Fase 1 — Batimentos de Dados** (dado coletado, tratado e documentado nas três partes; links públicos publicados no Google Drive) |
 | Ambiente | VS Code local, repositório já criado a partir do template FIAP e conectado ao GitHub |
 | Idioma dos entregáveis | **Português do Brasil** |
@@ -460,7 +462,7 @@ não é criado.
 
 ### 5bis.5 Decisões ainda em aberto
 
-- Itens "Ir Além" além do Ir Além 2 (este está na seção 5ter).
+- Itens "Ir Além" além do Ir Além 1 (seção 5quater) e do Ir Além 2 (seção 5ter).
 
 ### 5bis.6 Definition of Done da Fase 2
 
@@ -664,6 +666,25 @@ Entregas 1 e 2, sem alterar nenhuma linha existente.
 - confirmação do tutor sobre o Mendeley no lugar do Kaggle (5ter.2);
 - execução no Colab não testada (o notebook clona a `main`; a leitura dos
   arquivos pela `main` foi conferida por HTTP depois do push).
+
+---
+
+## 5quater. Ir Além 1 — Portal CardioIA (React + Vite) — repositório separado
+
+**Entrega extra da Fase 2 e exceção explícita à regra de monorepo** (seção 1):
+o enunciado exige repositório próprio com nome definido, então o código não
+vive aqui.
+
+| Item | Link (HTTP 200 verificado em 2026-09-24) |
+|---|---|
+| Repositório | `https://github.com/Cesar-Azeredo/grupo-zion-cardioia-portal` |
+| Portal publicado (GitHub Pages) | `https://cesar-azeredo.github.io/grupo-zion-cardioia-portal/` |
+
+Primeira publicação no GitHub Pages: 2026-09-24. Neste repositório, só um
+bloco curto no `README.md` com os dois links e a linha `0.2.2` do histórico
+de lançamentos. **Não duplicar aqui** código, documentação nem o link do
+vídeo — tudo isso é mantido no repositório do portal, que também tem seu
+próprio `TODO(humano)` do vídeo.
 
 ---
 

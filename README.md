@@ -269,6 +269,20 @@ jupyter nbconvert --to notebook --execute notebooks/fase-02/fase-02-tfidf-classi
 Os recursos da NLTK (stemmer RSLP e stopwords) são baixados pelo extrator para `.cache/nltk_data` e conferidos por SHA-256. **No Google Colab:** abra o notebook pelo badge acima — ele detecta o Colab e lê os CSVs direto do GitHub (branch `main`).
 
 
+## 🖥 Ir Além 1 — Portal CardioIA (React + Vite)
+
+> ⚠️ **Simulação acadêmica, sem validade clínica.** Só interface, sem back-end e sem dado real de paciente.
+
+Entrega extra da Fase 2 (não faz parte da atividade principal): a interface de um portal que simula a rotina de um centro de diagnóstico cardiológico, feita em **React + Vite**. É a **única entrega fora deste monorepo**, porque o enunciado exige um repositório próprio com nome definido.
+
+| | Link |
+|---|---|
+| Repositório do portal | [github.com/Cesar-Azeredo/grupo-zion-cardioia-portal](https://github.com/Cesar-Azeredo/grupo-zion-cardioia-portal) |
+| Portal publicado (GitHub Pages) | [cesar-azeredo.github.io/grupo-zion-cardioia-portal](https://cesar-azeredo.github.io/grupo-zion-cardioia-portal/) |
+
+O código, a documentação e o vídeo de demonstração do Ir Além 1 estão no repositório do portal.
+
+
 ## 🫀 Ir Além 2 — Diagnóstico visual de ECG com rede neural (MLP em Keras)
 
 > ⚠️ **Simulação acadêmica, sem validade clínica.** As imagens vêm de uma base pública de um único aparelho, hospital e país. Nada nesta entrega serve para triagem, diagnóstico ou decisão médica real.
@@ -340,6 +354,10 @@ python scripts/fase-02/ir-alem-2/03_audita_texto_impresso.py
     * 
 * 0.3.0 - XX/XX/2024
     * 
+* 0.2.2 - 24/09/2026
+    * Ir Além 1 (entrega extra da Fase 2): portal CardioIA em React + Vite, em repositório próprio, publicado no GitHub Pages.
+* 0.2.1 - 23/09/2026
+    * Ir Além 2 (entrega extra da Fase 2): MLP em Keras sobre as imagens de ECG da Entrega 1 (normal × anormal), com deduplicação, recorte do texto impresso, hipóteses pré-registradas e validação cruzada 5×3.
 * 0.2.0 - 23/09/2026
     * Fase 2 — Diagnóstico Automatizado: 10 frases de teste e mapa de conhecimento (3 doenças, 53 linhas, fontes do Ministério da Saúde), extrator de sintomas com protocolo pré-registrado, dataset rotulado de 80 frases com conjunto-desafio, e notebook TF-IDF + regressão logística com hipóteses pré-registradas e análise das distorções.
 * 0.1.0 - 27/08/2026
